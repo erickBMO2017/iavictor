@@ -1,0 +1,357 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const songs = [
+	{ title: 'Forró del Garaje', genre: 'Forró' },
+	{ title: 'Llamada Equivocada, Amor Correcto', genre: 'Romántico' },
+	{ title: 'Sophia and Stephen', genre: 'Pop Internacional' },
+];
+
+const steps = [
+	{
+		number: '01',
+		title: 'Cuéntanos tu historia',
+		text: 'Completa el formulario con los detalles del momento especial que quieres celebrar.',
+	},
+	{
+		number: '02',
+		title: 'Creamos tu música',
+		text: 'Nuestra IA compone una canción única basada en tu historia y emociones.',
+	},
+	{
+		number: '03',
+		title: 'Recibe y emociona',
+		text: 'En hasta 24 horas recibes tu canción lista para compartir.',
+	},
+];
+
+const included = [
+	'Música 100% original y exclusiva',
+	'Letra personalizada con tu historia',
+	'Elección entre varios estilos musicales',
+	'Producción con IA de última generación',
+	'2 revisiones incluidas',
+	'Archivo MP3 en alta calidad',
+	'Derechos de uso completos',
+	'Entrega en hasta 24 horas',
+];
+
+const testimonials = [
+	{
+		quote:
+			'Hice una música para pedir matrimonio y fue un momento inolvidable. La emoción fue real de principio a fin.',
+		name: 'Pedro Henrique',
+		meta: 'Belo Horizonte, MG',
+	},
+	{
+		quote:
+			'La canción para el cumpleaños de mi papá quedó increíble. La letra contó toda su historia.',
+		name: 'Juliana Santos',
+		meta: 'Curitiba, PR',
+	},
+];
+---
+
+<Layout>
+	<div class="music-page">
+		<section class="hero" aria-label="Hero música">
+			<p class="kicker">Música Personalizada con IA</p>
+			<h1>Tu historia merece una banda sonora</h1>
+			<p>
+				Creamos canciones personalizadas que capturan la esencia de tus momentos más especiales.
+				Cada composición es única, exclusiva y hecha para ti.
+			</p>
+			<div class="hero-actions">
+				<a href="#comprar" class="btn primary">Crear Mi Música · US$65 US$47</a>
+			</div>
+			<div class="hero-note">Entrega en hasta 24 horas</div>
+		</section>
+
+		<section class="samples" aria-label="Ejemplos de música">
+			<h2>Músicas creadas con nuestro sistema</h2>
+			<p>Escucha algunos ejemplos de canciones personalizadas que ya creamos.</p>
+			<div class="samples-grid">
+				{
+					songs.map((song) => (
+						<article class="sample-card">
+							<div class="sample-icon">♪</div>
+							<h3>{song.title}</h3>
+							<span>{song.genre}</span>
+						</article>
+					))
+				}
+			</div>
+		</section>
+
+		<section class="how" aria-label="Cómo funciona">
+			<h2>Crear tu música es simple y rápido</h2>
+			<div class="how-grid">
+				{
+					steps.map((step) => (
+						<article class="step-card">
+							<span class="step-number">{step.number}</span>
+							<h3>{step.title}</h3>
+							<p>{step.text}</p>
+						</article>
+					))
+				}
+			</div>
+		</section>
+
+		<section class="included" aria-label="Qué está incluido">
+			<h2>Todo lo que necesitas</h2>
+			<p>Cada música se crea con atención al detalle para garantizar un resultado premium.</p>
+			<ul>
+				{
+					included.map((item) => (
+						<li>{item}</li>
+					))
+				}
+			</ul>
+		</section>
+
+		<section class="testimonials" aria-label="Testimonios">
+			<h2>Historias reales de clientes</h2>
+			<div class="testimonials-grid">
+				{
+					testimonials.map((item) => (
+						<article class="testimonial-card">
+							<p>“{item.quote}”</p>
+							<div>
+								<strong>{item.name}</strong>
+								<span>{item.meta}</span>
+							</div>
+						</article>
+					))
+				}
+			</div>
+		</section>
+
+		<section class="final-cta" id="comprar" aria-label="Compra">
+			<p class="kicker">Promoción de Lanzamiento</p>
+			<h2>¿Listo para crear tu música?</h2>
+			<div class="price-line">
+				<span class="old">US$65</span>
+				<strong>US$47</strong>
+			</div>
+			<p>Pago seguro. Entrega en hasta 24 horas.</p>
+			<a href="#" class="btn primary">Crear Mi Música Ahora</a>
+			<small>Garantía de satisfacción · Pago 100% seguro</small>
+		</section>
+	</div>
+</Layout>
+
+<style>
+	.music-page {
+		display: flex;
+		flex-direction: column;
+		gap: 1.2rem;
+	}
+
+	.hero,
+	.samples,
+	.how,
+	.included,
+	.testimonials,
+	.final-cta {
+		border: 1px solid #e2e8f0;
+		border-radius: 1rem;
+		padding: 1.25rem;
+		background: #ffffff;
+	}
+
+	.kicker {
+		margin: 0;
+		font-weight: 700;
+		color: #334155;
+	}
+
+	h1 {
+		margin: 0.35rem 0 0;
+		font-size: clamp(1.7rem, 3.5vw, 2.35rem);
+		line-height: 1.2;
+		color: #0f172a;
+	}
+
+	h2 {
+		margin: 0;
+		font-size: 1.5rem;
+		color: #0f172a;
+	}
+
+	h3 {
+		margin: 0;
+		color: #0f172a;
+	}
+
+	p {
+		color: #475569;
+		line-height: 1.6;
+	}
+
+	.hero-actions {
+		margin-top: 1rem;
+	}
+
+	.hero-note {
+		margin-top: 0.8rem;
+		font-weight: 700;
+		color: #0f172a;
+	}
+
+	.btn {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		text-decoration: none;
+		padding: 0.68rem 1rem;
+		border-radius: 999px;
+		font-weight: 700;
+		border: 1px solid transparent;
+		transition: filter 0.2s ease;
+	}
+
+	.btn.primary {
+		background: #0f172a;
+		color: #ffffff;
+	}
+
+	.btn:hover {
+		filter: brightness(1.08);
+	}
+
+	.samples p,
+	.included p {
+		margin: 0.5rem 0 0;
+	}
+
+	.samples-grid,
+	.how-grid,
+	.testimonials-grid {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 0.8rem;
+		margin-top: 1rem;
+	}
+
+	.sample-card,
+	.step-card,
+	.testimonial-card {
+		border: 1px solid #e2e8f0;
+		border-radius: 0.85rem;
+		padding: 1rem;
+		background: #ffffff;
+	}
+
+	.sample-icon {
+		width: 2rem;
+		height: 2rem;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 999px;
+		background: #f1f5f9;
+		color: #0f172a;
+		font-weight: 800;
+		margin-bottom: 0.55rem;
+	}
+
+	.sample-card span {
+		display: inline-block;
+		margin-top: 0.45rem;
+		color: #64748b;
+		font-weight: 600;
+	}
+
+	.step-number {
+		display: inline-flex;
+		font-weight: 800;
+		font-size: 0.9rem;
+		color: #0f172a;
+		background: #f1f5f9;
+		border-radius: 999px;
+		padding: 0.2rem 0.55rem;
+		margin-bottom: 0.6rem;
+	}
+
+	.step-card p,
+	.testimonial-card p {
+		margin: 0.55rem 0 0;
+	}
+
+	.included ul {
+		margin: 0.9rem 0 0;
+		padding-left: 1.2rem;
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 0.5rem 1rem;
+		color: #334155;
+	}
+
+	.testimonial-card {
+		display: flex;
+		flex-direction: column;
+		gap: 0.8rem;
+	}
+
+	.testimonial-card strong {
+		display: block;
+		color: #0f172a;
+	}
+
+	.testimonial-card span {
+		color: #64748b;
+		font-size: 0.92rem;
+	}
+
+	.price-line {
+		display: flex;
+		align-items: center;
+		gap: 0.6rem;
+		margin-top: 0.7rem;
+	}
+
+	.price-line .old {
+		text-decoration: line-through;
+		color: #94a3b8;
+		font-weight: 700;
+	}
+
+	.price-line strong {
+		font-size: 1.45rem;
+		color: #0f172a;
+	}
+
+	.final-cta p {
+		margin: 0.5rem 0 0;
+	}
+
+	.final-cta .btn {
+		margin-top: 1rem;
+	}
+
+	.final-cta small {
+		display: block;
+		margin-top: 0.75rem;
+		color: #64748b;
+		font-weight: 600;
+	}
+
+	@media (max-width: 900px) {
+		.samples-grid,
+		.how-grid,
+		.testimonials-grid,
+		.included ul {
+			grid-template-columns: 1fr;
+		}
+
+		.hero,
+		.samples,
+		.how,
+		.included,
+		.testimonials,
+		.final-cta {
+			padding: 1rem;
+		}
+	}
+</style>

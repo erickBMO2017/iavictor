@@ -1,0 +1,408 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const sampleImages = [
+	'Viaje a Venecia',
+	'Año Nuevo 2026',
+	'Graduación Infantil',
+	'Retrato Profesional',
+	'Viaje a Tailandia',
+	'Vacaciones en Maldivas',
+];
+
+const included = [
+	{
+		title: 'Prompts de Instagram',
+		text: 'Todos los prompts públicos del perfil organizados y listos para usar.',
+	},
+	{
+		title: 'Prompts Exclusivos',
+		text: 'Prompts premium que no están en Instagram, creados para este pack.',
+	},
+	{
+		title: 'Actualizaciones Gratis',
+		text: 'Acceso a nuevos prompts públicos que se publiquen en el futuro.',
+	},
+	{
+		title: 'Guía Nano Banana',
+		text: 'Tutorial completo para generar imágenes con mejor calidad.',
+	},
+	{
+		title: 'Tips de Fotografía',
+		text: 'Cómo tomar fotos con mejores resultados para IA.',
+	},
+];
+
+const steps = [
+	{
+		number: '1',
+		title: 'Haz tu compra',
+		text: 'Pago seguro con tarjeta o PIX para activar acceso inmediato.',
+	},
+	{
+		number: '2',
+		title: 'Accede a los prompts',
+		text: 'Recibes por email tu enlace personal a la biblioteca completa.',
+	},
+	{
+		number: '3',
+		title: 'Crea imágenes increíbles',
+		text: 'Usa los prompts en Gemini, Midjourney u otra IA que prefieras.',
+	},
+];
+
+const bullets = [
+	'+500 prompts incluidos',
+	'Acceso de por vida al documento',
+	'Actualizaciones gratuitas',
+	'Soporte por Instagram @nagys_',
+	'Instrucciones simples de uso',
+	'Compatible con principales IAs',
+];
+
+const testimonials = [
+	{
+		quote:
+			'Los prompts son increíbles. Transformé mis fotos simples en imágenes de revista y fue súper fácil.',
+		name: 'Amanda Reis',
+		meta: 'Influencer Digital',
+	},
+	{
+		quote:
+			'Por fin tengo fotos profesionales para LinkedIn sin pagar fotógrafo. Excelente inversión.',
+		name: 'Bruno Oliveira',
+		meta: 'Consultor de Negocios',
+	},
+];
+---
+
+<Layout>
+	<div class="prompts-page">
+		<section class="hero" aria-label="Hero prompts">
+			<p class="kicker">Oferta especial por tiempo limitado</p>
+			<h1>+500 prompts para transformar tus fotos</h1>
+			<p>
+				Más de 500 prompts de Instagram + exclusivos + guía completa para crear imágenes
+				impactantes con IA.
+			</p>
+			<div class="price-box">
+				<span class="old">De US$135</span>
+				<strong>US$97</strong>
+				<span class="badge">28% OFF</span>
+			</div>
+			<div class="payment">Forma de pago: Tarjeta de Crédito o PIX</div>
+			<a href="#comprar" class="btn primary">Comprar Ahora</a>
+			<small>Acceso inmediato · Pago 100% seguro</small>
+		</section>
+
+		<section class="samples" aria-label="Ejemplos de imágenes">
+			<h2>Imágenes reales generadas con el pack</h2>
+			<div class="samples-grid">
+				{
+					sampleImages.map((item) => (
+						<article class="sample-card">
+							<div class="image-placeholder">IMG</div>
+							<h3>{item}</h3>
+						</article>
+					))
+				}
+			</div>
+		</section>
+
+		<section class="included" aria-label="Incluye">
+			<h2>Todo lo que necesitas</h2>
+			<p>Un pack completo para transformar tus fotos con IA.</p>
+			<div class="included-grid">
+				{
+					included.map((item) => (
+						<article class="included-card">
+							<h3>{item.title}</h3>
+							<p>{item.text}</p>
+						</article>
+					))
+				}
+			</div>
+		</section>
+
+		<section class="how" aria-label="Cómo funciona">
+			<h2>Cómo funciona</h2>
+			<div class="how-grid">
+				{
+					steps.map((step) => (
+						<article class="step-card">
+							<span class="step-number">{step.number}</span>
+							<h3>{step.title}</h3>
+							<p>{step.text}</p>
+						</article>
+					))
+				}
+			</div>
+		</section>
+
+		<section class="pack" id="comprar" aria-label="Pack de prompts">
+			<h2>Pack Completo de Prompts</h2>
+			<p>
+				Acceso inmediato a todos los prompts, guías y actualizaciones futuras. Todo lo que
+				necesitas para crear imágenes increíbles con IA.
+			</p>
+			<ul>
+				{
+					bullets.map((item) => (
+						<li>{item}</li>
+					))
+				}
+			</ul>
+			<div class="pack-footer">
+				<div class="price-box">
+					<span class="old">US$135</span>
+					<strong>US$97</strong>
+				</div>
+				<a href="#" class="btn primary">Comprar Ahora - US$97</a>
+			</div>
+			<small>Soporte por WhatsApp · Pago 100% seguro</small>
+		</section>
+
+		<section class="testimonials" aria-label="Testimonios">
+			<h2>Historias reales de clientes</h2>
+			<div class="testimonials-grid">
+				{
+					testimonials.map((item) => (
+						<article class="testimonial-card">
+							<p>“{item.quote}”</p>
+							<div>
+								<strong>{item.name}</strong>
+								<span>{item.meta}</span>
+							</div>
+						</article>
+					))
+				}
+			</div>
+		</section>
+	</div>
+</Layout>
+
+<style>
+	.prompts-page {
+		display: flex;
+		flex-direction: column;
+		gap: 1.2rem;
+	}
+
+	.hero,
+	.samples,
+	.included,
+	.how,
+	.pack,
+	.testimonials {
+		border: 1px solid #e2e8f0;
+		border-radius: 1rem;
+		padding: 1.25rem;
+		background: #ffffff;
+	}
+
+	.kicker {
+		margin: 0;
+		font-weight: 700;
+		color: #334155;
+	}
+
+	h1 {
+		margin: 0.35rem 0 0;
+		font-size: clamp(1.7rem, 3.5vw, 2.35rem);
+		line-height: 1.2;
+		color: #0f172a;
+	}
+
+	h2 {
+		margin: 0;
+		font-size: 1.5rem;
+		color: #0f172a;
+	}
+
+	h3 {
+		margin: 0;
+		font-size: 1rem;
+		color: #0f172a;
+	}
+
+	p {
+		color: #475569;
+		line-height: 1.6;
+	}
+
+	.price-box {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.55rem;
+		margin-top: 0.8rem;
+		flex-wrap: wrap;
+	}
+
+	.old {
+		text-decoration: line-through;
+		color: #94a3b8;
+		font-weight: 700;
+	}
+
+	.price-box strong {
+		font-size: 1.45rem;
+		color: #0f172a;
+	}
+
+	.badge {
+		padding: 0.22rem 0.5rem;
+		border-radius: 999px;
+		font-size: 0.72rem;
+		font-weight: 800;
+		color: #ffffff;
+		background: #ef4444;
+	}
+
+	.payment {
+		margin-top: 0.6rem;
+		font-weight: 700;
+		color: #334155;
+	}
+
+	.btn {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		text-decoration: none;
+		padding: 0.68rem 1rem;
+		border-radius: 999px;
+		font-weight: 700;
+		border: 1px solid transparent;
+		transition: filter 0.2s ease;
+		margin-top: 1rem;
+	}
+
+	.btn.primary {
+		background: #0f172a;
+		color: #ffffff;
+	}
+
+	.btn:hover {
+		filter: brightness(1.08);
+	}
+
+	small {
+		display: block;
+		margin-top: 0.65rem;
+		color: #64748b;
+		font-weight: 600;
+	}
+
+	.samples-grid {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 0.8rem;
+		margin-top: 1rem;
+	}
+
+	.sample-card,
+	.included-card,
+	.step-card,
+	.testimonial-card {
+		border: 1px solid #e2e8f0;
+		border-radius: 0.85rem;
+		padding: 1rem;
+		background: #ffffff;
+	}
+
+	.image-placeholder {
+		height: 110px;
+		border-radius: 0.65rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: #f1f5f9;
+		color: #64748b;
+		font-weight: 700;
+		margin-bottom: 0.6rem;
+	}
+
+	.included p,
+	.pack p {
+		margin: 0.5rem 0 0;
+	}
+
+	.included-grid,
+	.how-grid,
+	.testimonials-grid {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 0.8rem;
+		margin-top: 1rem;
+	}
+
+	.included-card p,
+	.step-card p,
+	.testimonial-card p {
+		margin: 0.55rem 0 0;
+	}
+
+	.step-number {
+		display: inline-flex;
+		font-weight: 800;
+		font-size: 0.88rem;
+		color: #0f172a;
+		background: #f1f5f9;
+		border-radius: 999px;
+		padding: 0.2rem 0.55rem;
+		margin-bottom: 0.6rem;
+	}
+
+	.pack ul {
+		margin: 0.9rem 0 0;
+		padding-left: 1.2rem;
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 0.5rem 1rem;
+		color: #334155;
+	}
+
+	.pack-footer {
+		margin-top: 1rem;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 0.7rem;
+		flex-wrap: wrap;
+	}
+
+	.testimonial-card {
+		display: flex;
+		flex-direction: column;
+		gap: 0.8rem;
+	}
+
+	.testimonial-card strong {
+		display: block;
+		color: #0f172a;
+	}
+
+	.testimonial-card span {
+		color: #64748b;
+		font-size: 0.92rem;
+	}
+
+	@media (max-width: 900px) {
+		.samples-grid,
+		.included-grid,
+		.how-grid,
+		.testimonials-grid,
+		.pack ul {
+			grid-template-columns: 1fr;
+		}
+
+		.hero,
+		.samples,
+		.included,
+		.how,
+		.pack,
+		.testimonials {
+			padding: 1rem;
+		}
+	}
+</style>

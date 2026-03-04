@@ -1,0 +1,187 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const faqs = [
+	{
+		q: '🎨 ¿Para quién es el Pack de Prompts de Nagy\'s Shop?',
+		a: 'Está pensado para creadores, emprendedores y cualquier persona que quiera transformar fotos comunes en imágenes impactantes usando IA.',
+	},
+	{
+		q: '🧪 ¿Los prompts realmente funcionan?',
+		a: 'Sí. Están probados en distintos escenarios y optimizados para obtener resultados consistentes con buenas instrucciones y una foto base adecuada.',
+	},
+	{
+		q: '🌍 ¿En qué plataformas funcionan los prompts?',
+		a: 'Puedes usarlos en herramientas populares como Gemini, Midjourney y otros generadores de imágenes compatibles con prompts detallados.',
+	},
+	{
+		q: '📸 ¿Hay ejemplos visuales de resultados?',
+		a: 'Sí, incluimos referencias y ejemplos para que entiendas cómo adaptar cada prompt según el estilo que buscas.',
+	},
+	{
+		q: '💼 ¿Puedo usar las imágenes con fines comerciales?',
+		a: 'En general sí, siempre que revises las condiciones de la plataforma de IA que utilices y respetes derechos de terceros.',
+	},
+	{
+		q: '💳 ¿Existe política de reembolso?',
+		a: 'Si tienes un problema con el acceso o la entrega, escríbenos por WhatsApp y revisaremos tu caso para darte la mejor solución posible.',
+	},
+	{
+		q: '🌱 Soy principiante en IA, ¿puedo usar este producto?',
+		a: 'Sí. El pack incluye guía paso a paso y recomendaciones para que puedas empezar incluso sin experiencia previa.',
+	},
+	{
+		q: '🧭 ¿Por dónde empiezo si soy nuevo?',
+		a: 'Comienza por la guía principal, prueba un prompt base y luego ajusta variables como iluminación, estilo y encuadre.',
+	},
+	{
+		q: '📷 ¿Puedo usar mis propias fotos?',
+		a: 'Claro. De hecho, el sistema está pensado para que partas de tus fotos y las conviertas en composiciones mejoradas con IA.',
+	},
+	{
+		q: '🤔 ¿Qué hago si el resultado no sale bien al primer intento?',
+		a: 'Es normal iterar. Ajusta el prompt, prueba otra imagen base y modifica el estilo hasta conseguir el resultado ideal.',
+	},
+	{
+		q: '🆘 ¿Puedo pedir ayuda si tengo dudas?',
+		a: 'Sí, ofrecemos soporte por Instagram y WhatsApp para ayudarte en la configuración y uso del contenido.',
+	},
+	{
+		q: '💙 ¿Qué hace diferente a Nagy\'s Shop?',
+		a: 'Combinamos prompts prácticos, contenido exclusivo, actualizaciones frecuentes y enfoque en resultados reales para uso personal o profesional.',
+	},
+];
+---
+
+<Layout>
+	<div class="faq-page">
+		<section class="faq-hero" aria-label="Encabezado FAQ">
+			<p class="kicker">Central de Ayuda</p>
+			<h1>Preguntas Frecuentes</h1>
+			<p>Encuentra respuestas a las dudas más comunes sobre nuestros productos y servicios.</p>
+		</section>
+
+		<section class="faq-list" aria-label="Listado de preguntas">
+			{
+				faqs.map((item, index) => (
+					<details class="faq-item" open={index === 0}>
+						<summary>{item.q}</summary>
+						<p>{item.a}</p>
+					</details>
+				))
+			}
+		</section>
+
+		<section class="faq-contact" aria-label="Contacto soporte">
+			<h2>¿No encontraste tu respuesta?</h2>
+			<p>Escríbenos por WhatsApp y con gusto te ayudamos.</p>
+			<a href="https://wa.me/18438226879" target="_blank" rel="noreferrer noopener">Hablar por WhatsApp</a>
+		</section>
+	</div>
+</Layout>
+
+<style>
+	.faq-page {
+		display: flex;
+		flex-direction: column;
+		gap: 1.1rem;
+	}
+
+	.faq-hero,
+	.faq-list,
+	.faq-contact {
+		border: 1px solid #e2e8f0;
+		border-radius: 1rem;
+		padding: 1.25rem;
+		background: #ffffff;
+	}
+
+	.kicker {
+		margin: 0;
+		font-weight: 700;
+		color: #334155;
+	}
+
+	h1 {
+		margin: 0.35rem 0 0;
+		font-size: clamp(1.7rem, 3.5vw, 2.35rem);
+		line-height: 1.2;
+		color: #0f172a;
+	}
+
+	.faq-hero p {
+		margin: 0.75rem 0 0;
+		color: #475569;
+		line-height: 1.6;
+	}
+
+	.faq-list {
+		display: flex;
+		flex-direction: column;
+		gap: 0.65rem;
+	}
+
+	.faq-item {
+		border: 1px solid #e2e8f0;
+		border-radius: 0.85rem;
+		padding: 0.8rem 0.9rem;
+		background: #ffffff;
+	}
+
+	.faq-item[open] {
+		background: #f8fafc;
+	}
+
+	summary {
+		cursor: pointer;
+		font-weight: 700;
+		color: #0f172a;
+		list-style: none;
+	}
+
+	summary::-webkit-details-marker {
+		display: none;
+	}
+
+	.faq-item p {
+		margin: 0.65rem 0 0;
+		color: #475569;
+		line-height: 1.6;
+	}
+
+	h2 {
+		margin: 0;
+		font-size: 1.5rem;
+		color: #0f172a;
+	}
+
+	.faq-contact p {
+		margin: 0.55rem 0 0;
+		color: #475569;
+	}
+
+	.faq-contact a {
+		display: inline-flex;
+		margin-top: 1rem;
+		text-decoration: none;
+		padding: 0.68rem 1rem;
+		border-radius: 999px;
+		font-weight: 700;
+		background: #0f172a;
+		color: #ffffff;
+		border: 1px solid transparent;
+		transition: filter 0.2s ease;
+	}
+
+	.faq-contact a:hover {
+		filter: brightness(1.08);
+	}
+
+	@media (max-width: 900px) {
+		.faq-hero,
+		.faq-list,
+		.faq-contact {
+			padding: 1rem;
+		}
+	}
+</style>

@@ -1,0 +1,389 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const offers = [
+	{
+		title: 'Música Personalizada',
+		description:
+			'Crea una canción única para celebrar momentos especiales con tecnología de IA.',
+		price: 'US$47',
+		oldPrice: 'US$65',
+		discount: '28% OFF',
+		href: '/musica',
+		features: ['Entrega en hasta 24h', '100% única y exclusiva', 'Revisiones incluidas'],
+		cta: 'Crear Mi Música',
+	},
+	{
+		title: 'Pack Completo de Prompts',
+		description:
+			'Accede a prompts listos para Instagram y contenido viral, con guía completa y updates.',
+		price: 'US$97',
+		oldPrice: 'US$135',
+		href: '/prompts',
+		features: ['Prompts exclusivos', 'Guía completa', 'Actualizaciones gratuitas'],
+		cta: 'Comprar Ahora',
+	},
+];
+
+const socialStats = [
+	{ value: '150K+', label: 'Seguidores' },
+	{ value: '500K+', label: 'Likes' },
+	{ value: '10K+', label: 'Comentarios' },
+];
+
+const perks = [
+	{
+		title: 'Entrega Rápida',
+		text: 'Música entregada en hasta 24 horas y prompts con acceso inmediato.',
+	},
+	{
+		title: 'Calidad Premium',
+		text: 'Productos creados con tecnologías de IA modernas y enfoque en resultados.',
+	},
+	{
+		title: 'Soporte Dedicado',
+		text: 'Atención personalizada para resolver dudas y acompañarte en todo el proceso.',
+	},
+];
+
+const testimonials = [
+	{
+		name: 'Pedro Henrique',
+		meta: 'Belo Horizonte, MG',
+		quote:
+			'Hice una música para pedir matrimonio y fue emocionante. El resultado superó todo lo que esperaba.',
+	},
+	{
+		name: 'Amanda Reis',
+		meta: 'Influencer Digital',
+		quote:
+			'Los prompts son increíbles. Mis fotos quedaron con un nivel profesional en pocos minutos.',
+	},
+	{
+		name: 'Juliana Santos',
+		meta: 'Curitiba, PR',
+		quote:
+			'Pedí una canción para el cumpleaños de mi papá y logramos un momento inolvidable en familia.',
+	},
+];
+---
+
+<Layout>
+	<div class="home">
+		<section class="hero" aria-label="Hero principal">
+			<p class="hero-kicker">Música & Prompts con IA</p>
+			<h1>Crea música personalizada o domina prompts virales</h1>
+			<p class="hero-lead">
+				Convierte tus ideas en contenido único con entregas rápidas, calidad premium y soporte dedicado.
+			</p>
+			<div class="hero-actions">
+				<a href="/musica" class="btn primary">Crear Música</a>
+				<a href="/prompts" class="btn secondary">Ver Prompts</a>
+			</div>
+		</section>
+
+		<section class="offers" aria-label="Productos principales">
+			{
+				offers.map((offer) => (
+					<article class="offer-card">
+						<h2>{offer.title}</h2>
+						<p class="offer-description">{offer.description}</p>
+						<ul>
+							{offer.features.map((item) => (
+								<li>{item}</li>
+							))}
+						</ul>
+						<div class="offer-footer">
+							<div class="price-wrap">
+								<span class="price">{offer.price}</span>
+								{offer.oldPrice && <span class="old-price">{offer.oldPrice}</span>}
+								{offer.discount && <span class="badge">{offer.discount}</span>}
+							</div>
+							<a href={offer.href} class="btn ghost">{offer.cta}</a>
+						</div>
+					</article>
+				))
+			}
+		</section>
+
+		<section class="social-proof" aria-label="Métricas de redes">
+			<h2>+150.000 personas siguen nuestro trabajo</h2>
+			<p>Únete a la comunidad y mira lo que está diciendo.</p>
+			<div class="stats-grid">
+				{
+					socialStats.map((item) => (
+						<div class="stat-item">
+							<strong>{item.value}</strong>
+							<span>{item.label}</span>
+						</div>
+					))
+				}
+			</div>
+		</section>
+
+		<section class="perks" aria-label="Por qué elegirnos">
+			<h2>Nagy's Shop</h2>
+			<p>Calidad, rapidez y soporte dedicado en cada entrega.</p>
+			<div class="perks-grid">
+				{
+					perks.map((perk) => (
+						<article class="perk-card">
+							<h3>{perk.title}</h3>
+							<p>{perk.text}</p>
+						</article>
+					))
+				}
+			</div>
+		</section>
+
+		<section class="testimonials" aria-label="Testimonios">
+			<h2>Historias reales de personas que transformaron sus ideas</h2>
+			<div class="testimonials-grid">
+				{
+					testimonials.map((item) => (
+						<article class="testimonial-card">
+							<p>“{item.quote}”</p>
+							<div>
+								<strong>{item.name}</strong>
+								<span>{item.meta}</span>
+							</div>
+						</article>
+					))
+				}
+			</div>
+		</section>
+	</div>
+</Layout>
+
+<style>
+	.home {
+		display: flex;
+		flex-direction: column;
+		gap: 1.75rem;
+	}
+
+	.hero,
+	.social-proof,
+	.perks,
+	.testimonials {
+		padding: 1.4rem;
+		border: 1px solid #e2e8f0;
+		border-radius: 1rem;
+		background: #ffffff;
+	}
+
+	.hero-kicker {
+		margin: 0;
+		font-weight: 700;
+		color: #334155;
+	}
+
+	h1 {
+		margin: 0.35rem 0 0;
+		font-size: clamp(1.7rem, 3.6vw, 2.4rem);
+		line-height: 1.2;
+		color: #0f172a;
+	}
+
+	.hero-lead {
+		margin: 0.8rem 0 0;
+		color: #475569;
+		line-height: 1.6;
+		max-width: 62ch;
+	}
+
+	.hero-actions {
+		margin-top: 1rem;
+		display: flex;
+		gap: 0.6rem;
+		flex-wrap: wrap;
+	}
+
+	.btn {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		text-decoration: none;
+		padding: 0.65rem 1rem;
+		border-radius: 999px;
+		font-weight: 700;
+		border: 1px solid transparent;
+		transition: filter 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+	}
+
+	.btn.primary {
+		background: #0f172a;
+		color: #ffffff;
+	}
+
+	.btn.secondary,
+	.btn.ghost {
+		background: #ffffff;
+		border-color: #dbe1e8;
+		color: #0f172a;
+	}
+
+	.btn:hover {
+		filter: brightness(1.05);
+	}
+
+	.offers {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 1rem;
+	}
+
+	.offer-card {
+		border: 1px solid #e2e8f0;
+		border-radius: 1rem;
+		padding: 1.25rem;
+		background: #ffffff;
+		display: flex;
+		flex-direction: column;
+		gap: 0.8rem;
+	}
+
+	.offer-card h2,
+	.social-proof h2,
+	.perks h2,
+	.testimonials h2 {
+		margin: 0;
+		font-size: 1.35rem;
+		color: #0f172a;
+	}
+
+	.offer-description,
+	.social-proof p,
+	.perks > p {
+		margin: 0;
+		color: #475569;
+		line-height: 1.55;
+	}
+
+	.offer-card ul {
+		margin: 0;
+		padding-left: 1.2rem;
+		color: #334155;
+		display: grid;
+		gap: 0.35rem;
+	}
+
+	.offer-footer {
+		margin-top: auto;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 0.65rem;
+		flex-wrap: wrap;
+	}
+
+	.price-wrap {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		flex-wrap: wrap;
+	}
+
+	.price {
+		font-size: 1.2rem;
+		font-weight: 800;
+		color: #0f172a;
+	}
+
+	.old-price {
+		text-decoration: line-through;
+		color: #94a3b8;
+		font-weight: 600;
+	}
+
+	.badge {
+		padding: 0.22rem 0.45rem;
+		border-radius: 999px;
+		font-size: 0.72rem;
+		font-weight: 800;
+		letter-spacing: 0.02em;
+		color: #ffffff;
+		background: #ef4444;
+	}
+
+	.stats-grid,
+	.perks-grid,
+	.testimonials-grid {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 0.8rem;
+		margin-top: 1rem;
+	}
+
+	.stat-item,
+	.perk-card,
+	.testimonial-card {
+		border: 1px solid #e2e8f0;
+		border-radius: 0.85rem;
+		padding: 1rem;
+		background: #ffffff;
+	}
+
+	.stat-item {
+		display: flex;
+		flex-direction: column;
+		gap: 0.22rem;
+	}
+
+	.stat-item strong {
+		font-size: 1.35rem;
+		line-height: 1.1;
+		color: #0f172a;
+	}
+
+	.stat-item span {
+		color: #475569;
+		font-weight: 600;
+	}
+
+	.perk-card h3 {
+		margin: 0;
+		color: #0f172a;
+		font-size: 1rem;
+	}
+
+	.perk-card p,
+	.testimonial-card p {
+		margin: 0.55rem 0 0;
+		color: #475569;
+		line-height: 1.55;
+	}
+
+	.testimonial-card {
+		display: flex;
+		flex-direction: column;
+		gap: 0.85rem;
+	}
+
+	.testimonial-card strong {
+		display: block;
+		color: #0f172a;
+	}
+
+	.testimonial-card span {
+		color: #64748b;
+		font-size: 0.9rem;
+	}
+
+	@media (max-width: 900px) {
+		.offers,
+		.stats-grid,
+		.perks-grid,
+		.testimonials-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.hero,
+		.social-proof,
+		.perks,
+		.testimonials,
+		.offer-card {
+			padding: 1rem;
+		}
+	}
+</style>
