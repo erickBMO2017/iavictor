@@ -160,7 +160,11 @@ const paypalClientId = import.meta.env.PUBLIC_PAYPAL_CLIENT_ID ?? '';
 					const response = await fetch('/.netlify/functions/capture-paypal-order', {
 						method: 'POST',
 						headers: { 'Content-Type': 'application/json' },
-						body: JSON.stringify({ orderID: data.orderID }),
+						body: JSON.stringify({ 
+							orderID: data.orderID,
+							buyerEmail: emailInput?.value?.trim() || '',
+							buyerName: nameInput?.value?.trim() || ''
+						}),
 					});
 
 					if (!response.ok) {
