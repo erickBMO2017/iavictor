@@ -1,0 +1,95 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const orderID = Astro.url.searchParams.get('orderID');
+---
+
+<Layout>
+	<div class="result-page success">
+		<section class="result-card" aria-label="Pago exitoso">
+			<p class="tag">Pago completado</p>
+			<h1>¡Gracias por tu compra!</h1>
+			<p>
+				Tu pago fue aprobado correctamente. En breve recibirás acceso a tu contenido en el correo
+				registrado.
+			</p>
+			{orderID && <p class="order">ID de orden: {orderID}</p>}
+			<div class="actions">
+				<a href="/prompts" class="btn secondary">Volver a Prompts</a>
+				<a href="https://wa.me/18438226879" target="_blank" rel="noreferrer noopener" class="btn primary">Contactar Soporte</a>
+			</div>
+		</section>
+	</div>
+</Layout>
+
+<style>
+	.result-page {
+		display: flex;
+		justify-content: center;
+	}
+
+	.result-card {
+		width: min(720px, 100%);
+		border: 1px solid #e2e8f0;
+		border-radius: 1rem;
+		padding: 1.4rem;
+		background: #ffffff;
+	}
+
+	.tag {
+		margin: 0;
+		display: inline-flex;
+		padding: 0.3rem 0.6rem;
+		border-radius: 999px;
+		font-size: 0.8rem;
+		font-weight: 700;
+		background: #dcfce7;
+		color: #166534;
+	}
+
+	h1 {
+		margin: 0.65rem 0 0;
+		font-size: clamp(1.6rem, 3.3vw, 2.2rem);
+		color: #0f172a;
+	}
+
+	p {
+		margin: 0.65rem 0 0;
+		line-height: 1.6;
+		color: #475569;
+	}
+
+	.order {
+		font-weight: 700;
+		color: #334155;
+	}
+
+	.actions {
+		margin-top: 1rem;
+		display: flex;
+		gap: 0.6rem;
+		flex-wrap: wrap;
+	}
+
+	.btn {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		text-decoration: none;
+		padding: 0.66rem 1rem;
+		border-radius: 999px;
+		font-weight: 700;
+		border: 1px solid transparent;
+	}
+
+	.btn.primary {
+		background: #0f172a;
+		color: #ffffff;
+	}
+
+	.btn.secondary {
+		background: #ffffff;
+		border-color: #dbe1e8;
+		color: #0f172a;
+	}
+</style>

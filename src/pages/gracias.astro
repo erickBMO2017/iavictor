@@ -1,0 +1,123 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout>
+	<div class="success-page">
+		<div class="success-card">
+			<div class="icon-wrapper">
+				<svg class="success-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+					<path d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+				</svg>
+			</div>
+			
+			<h1>¡Gracias por tu compra!</h1>
+			<p class="message">Tu pago se ha procesado correctamente. Haz clic en el botón de abajo para obtener tu Pack Completo de Prompts.</p>
+			
+			<div class="download-section">
+				<!-- El atributo download fuerza al navegador a descargar el archivo en lugar de solo abrirlo -->
+				<a href="/descargas/pack-prompts-solene.pdf" download="Pack-Prompts-Solene.pdf" class="btn primary download-btn">
+					<svg class="btn-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+						<path d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+					</svg>
+					Descargar PDF Ahora
+				</a>
+			</div>
+			
+			<p class="note">¿Tuviste algún problema con la descarga? <a href="https://wa.me/18438226879" target="_blank" rel="noreferrer noopener">Contáctanos por WhatsApp</a> y te lo enviaremos manualmente.</p>
+		</div>
+	</div>
+</Layout>
+
+<style>
+	.success-page {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		min-height: 60vh;
+		padding: 2rem 1rem;
+	}
+
+	.success-card {
+		background: #ffffff;
+		border: 1px solid #e2e8f0;
+		border-radius: 1.5rem;
+		padding: 3rem 2rem;
+		max-width: 500px;
+		text-align: center;
+		box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
+	}
+
+	.icon-wrapper {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 4rem;
+		height: 4rem;
+		background: #ecfdf5;
+		color: #10b981;
+		border-radius: 50%;
+		margin-bottom: 1.5rem;
+	}
+
+	.success-icon {
+		width: 2.5rem;
+		height: 2.5rem;
+	}
+
+	h1 {
+		margin: 0;
+		font-size: 1.8rem;
+		color: #0f172a;
+	}
+
+	.message {
+		margin: 1rem 0 2rem;
+		color: #475569;
+		line-height: 1.6;
+	}
+
+	.download-btn {
+		width: 100%;
+		padding: 1rem;
+		font-size: 1.1rem;
+		display: inline-flex;
+		gap: 0.5rem;
+	}
+
+	.btn-icon {
+		width: 1.25rem;
+		height: 1.25rem;
+	}
+
+	.note {
+		margin-top: 2rem;
+		font-size: 0.9rem;
+		color: #64748b;
+	}
+
+	.note a {
+		color: #0f172a;
+		font-weight: 600;
+		text-decoration: underline;
+	}
+
+	/* Importamos los estilos de botones de tu web */
+	.btn {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		text-decoration: none;
+		border-radius: 999px;
+		font-weight: 700;
+		border: 1px solid transparent;
+		transition: filter 0.2s ease;
+	}
+	.btn.primary {
+		background: #0f172a;
+		color: #ffffff;
+	}
+	.btn:hover {
+		filter: brightness(1.1);
+	}
+</style>

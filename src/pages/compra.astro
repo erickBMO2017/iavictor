@@ -1,0 +1,485 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const includes = [
+	'+500 prompts incluidos',
+	'Acceso vitalicio al documento',
+	'Actualizaciones gratuitas',
+	'Soporte prioritario por WhatsApp',
+	'Compatible con las principales IAs',
+];
+
+const paypalClientId = import.meta.env.PUBLIC_PAYPAL_CLIENT_ID ?? '';
+---
+
+<Layout>
+	<div class="checkout-page">
+		<a class="back-link" href="/prompts">← Volver al producto</a>
+
+		<section class="checkout-header" aria-label="Resumen compra">
+			<p class="kicker">Revisa tu compra antes de pagar</p>
+			<h1>Pack Completo de Prompts</h1>
+			<p>
+				Acceso inmediato a todos los prompts, guías y actualizaciones futuras para crear
+				imágenes increíbles con IA.
+			</p>
+		</section>
+
+		<div class="checkout-grid">
+			<section class="card order-summary" aria-label="Resumen del pedido">
+				<h2>Pack Completo de Prompts</h2>
+				<h3>Qué está incluido</h3>
+				<ul>
+					{
+						includes.map((item) => (
+							<li>{item}</li>
+						))
+					}
+				</ul>
+
+				<div class="trust-row">
+					<span>Pago seguro</span>
+					<span>Acceso inmediato</span>
+				</div>
+			</section>
+
+			<section class="card payment-box" aria-label="Formulario de pago" data-paypal-client-id={paypalClientId}>
+				<p class="offer">Oferta por tiempo limitado</p>
+				<div class="total-line">
+					<span class="label">Total</span>
+					<div class="prices">
+						<span class="old">US$15</span>
+						<strong>US$1</strong>
+						<span class="badge">93% OFF</span>
+					</div>
+				</div>
+
+				<form class="checkout-form" id="checkout-form">
+					<label>
+						<span>Nombre completo</span>
+						<input id="full-name" type="text" placeholder="Tu nombre" />
+					</label>
+
+					<label>
+						<span>Tu email</span>
+						<input id="email" type="email" placeholder="tu@email.com" />
+						<small>Enviaremos el link de acceso a este correo.</small>
+					</label>
+
+					<button id="paypal-init-btn" type="button" class="pay-btn paypal-btn">Pagar con PayPal</button>
+					<div id="paypal-button-container" class="paypal-container" aria-live="polite"></div>
+					<p id="paypal-status" class="paypal-status" aria-live="polite"></p>
+					
+					<div class="divider"><span>o pago manual</span></div>
+					<a href="https://wa.me/18438226879?text=Hola%2C%20quiero%20comprar%20el%20Pack%20de%20Prompts%20con%20Binance%20o%20Zinli" target="_blank" rel="noreferrer noopener" class="pay-btn manual-btn">
+						Pagar con Binance o Zinli
+					</a>
+					<div class="checkout-notes">
+						<span>Acceso inmediato</span>
+						<span>Pago 100% seguro</span>
+					</div>
+				</form>
+			</section>
+		</div>
+
+		<section class="help" aria-label="Ayuda">
+			<p>¿Tienes dudas antes de comprar?</p>
+			<a href="https://wa.me/18438226879" target="_blank" rel="noreferrer noopener">Contacto por WhatsApp</a>
+		</section>
+	</div>
+</Layout>
+
+<script is:inline>
+	const paymentBox = document.querySelector('.payment-box');
+	const paypalInitButton = document.getElementById('paypal-init-btn');
+	const paypalContainer = document.getElementById('paypal-button-container');
+	const paypalStatus = document.getElementById('paypal-status');
+	const paypalClientId = paymentBox?.dataset.paypalClientId;
+	const nameInput = document.getElementById('full-name');
+	const emailInput = document.getElementById('email');
+	const successUrl = `${window.location.origin}/pago-exitoso`;
+	const cancelUrl = `${window.location.origin}/pago-cancelado`;
+
+	const setStatus = (text, isError = false) => {
+		if (!paypalStatus) return;
+		paypalStatus.textContent = text;
+		paypalStatus.dataset.type = isError ? 'error' : 'ok';
+	};
+
+	const loadPayPalSdk = async () => {
+		if (window.paypal) return window.paypal;
+		if (!paypalClientId) {
+			setStatus('Falta configurar PUBLIC_PAYPAL_CLIENT_ID.', true);
+			return null;
+		}
+
+		const script = document.createElement('script');
+		script.src = `https://www.paypal.com/sdk/js?client-id=${encodeURIComponent(paypalClientId)}&currency=USD&intent=capture`;
+		script.async = true;
+
+		await new Promise((resolve, reject) => {
+			script.onload = resolve;
+			script.onerror = reject;
+			document.head.appendChild(script);
+		});
+
+		return window.paypal;
+	};
+
+	const renderPayPalButtons = async () => {
+		const paypal = await loadPayPalSdk();
+		if (!paypal || !paypalContainer) return;
+
+		paypalContainer.style.display = 'block';
+		paypalContainer.innerHTML = '';
+
+		paypal
+			.Buttons({
+				style: { layout: 'vertical', shape: 'pill' },
+				createOrder: async () => {
+					setStatus('Creando orden en PayPal...');
+					const response = await fetch('/.netlify/functions/create-paypal-order', {
+						method: 'POST',
+						headers: { 'Content-Type': 'application/json' },
+						body: JSON.stringify({
+							name: nameInput?.value?.trim() || '',
+							email: emailInput?.value?.trim() || '',
+						}),
+					});
+
+					if (!response.ok) {
+						const errorData = await response.json().catch(() => ({}));
+						throw new Error(errorData?.error || 'No se pudo crear la orden.');
+					}
+
+					const data = await response.json();
+					return data.orderID;
+				},
+				onApprove: async (data) => {
+					setStatus('Capturando pago...');
+					const response = await fetch('/.netlify/functions/capture-paypal-order', {
+						method: 'POST',
+						headers: { 'Content-Type': 'application/json' },
+						body: JSON.stringify({ orderID: data.orderID }),
+					});
+
+					if (!response.ok) {
+						const errorData = await response.json().catch(() => ({}));
+						throw new Error(errorData?.error || 'No se pudo capturar el pago.');
+					}
+
+					// Obtenemos la respuesta del servidor (que ahora incluye downloadUrl)
+					const result = await response.json();
+
+					setStatus('Pago completado con PayPal. Redirigiendo...');
+					if (result.status === "COMPLETED" && result.downloadUrl) {
+						window.location.href = result.downloadUrl;
+					} else {
+						window.location.href = `${successUrl}?orderID=${encodeURIComponent(data.orderID)}`;
+					}
+				},
+				onCancel: (data) => {
+					window.location.href = `${cancelUrl}${data?.orderID ? `?orderID=${encodeURIComponent(data.orderID)}` : ''}`;
+				},
+				onError: (error) => {
+					setStatus(error?.message || 'Error al procesar el pago con PayPal.', true);
+				},
+			})
+			.render('#paypal-button-container');
+	};
+
+	if (paypalInitButton) {
+		paypalInitButton.addEventListener('click', async () => {
+			try {
+				await renderPayPalButtons();
+			} catch {
+				setStatus('No se pudo cargar PayPal. Intenta de nuevo.', true);
+			}
+		});
+	}
+</script>
+
+<style>
+	.checkout-page {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
+
+	.back-link {
+		display: inline-flex;
+		width: fit-content;
+		text-decoration: none;
+		font-weight: 700;
+		color: #334155;
+	}
+
+	.back-link:hover {
+		color: #0f172a;
+	}
+
+	.checkout-header,
+	.card,
+	.help {
+		border: 1px solid #e2e8f0;
+		border-radius: 1rem;
+		padding: 1.25rem;
+		background: #ffffff;
+	}
+
+	.kicker {
+		margin: 0;
+		font-weight: 700;
+		color: #334155;
+	}
+
+	h1 {
+		margin: 0.35rem 0 0;
+		font-size: clamp(1.6rem, 3.3vw, 2.2rem);
+		line-height: 1.2;
+		color: #0f172a;
+	}
+
+	.checkout-header p {
+		margin: 0.6rem 0 0;
+		line-height: 1.6;
+		color: #475569;
+	}
+
+	.checkout-grid {
+		display: grid;
+		grid-template-columns: 1.1fr 1fr;
+		gap: 1rem;
+	}
+
+	h2 {
+		margin: 0;
+		font-size: 1.35rem;
+		color: #0f172a;
+	}
+
+	h3 {
+		margin: 0.85rem 0 0;
+		font-size: 1rem;
+		color: #0f172a;
+	}
+
+	.order-summary ul {
+		margin: 0.7rem 0 0;
+		padding-left: 1.2rem;
+		display: grid;
+		gap: 0.45rem;
+		color: #334155;
+	}
+
+	.trust-row {
+		margin-top: 1rem;
+		display: flex;
+		gap: 0.55rem;
+		flex-wrap: wrap;
+	}
+
+	.trust-row span,
+	.checkout-notes span {
+		font-weight: 700;
+		font-size: 0.88rem;
+		color: #334155;
+		background: #f8fafc;
+		border: 1px solid #e2e8f0;
+		border-radius: 999px;
+		padding: 0.28rem 0.55rem;
+	}
+
+	.offer {
+		margin: 0;
+		font-weight: 700;
+		color: #334155;
+	}
+
+	.total-line {
+		margin-top: 0.7rem;
+		display: flex;
+		justify-content: space-between;
+		gap: 0.8rem;
+		align-items: flex-start;
+	}
+
+	.total-line .label {
+		font-weight: 700;
+		color: #0f172a;
+	}
+
+	.prices {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.45rem;
+		flex-wrap: wrap;
+	}
+
+	.old {
+		text-decoration: line-through;
+		color: #94a3b8;
+		font-weight: 700;
+	}
+
+	.prices strong {
+		font-size: 1.45rem;
+		color: #0f172a;
+	}
+
+	.badge {
+		padding: 0.22rem 0.5rem;
+		border-radius: 999px;
+		font-size: 0.72rem;
+		font-weight: 800;
+		color: #ffffff;
+		background: #ef4444;
+	}
+
+	.checkout-form {
+		margin-top: 1rem;
+		display: flex;
+		flex-direction: column;
+		gap: 0.8rem;
+	}
+
+	label {
+		display: flex;
+		flex-direction: column;
+		gap: 0.35rem;
+	}
+
+	label span {
+		font-weight: 700;
+		color: #0f172a;
+	}
+
+	input {
+		border: 1px solid #dbe1e8;
+		border-radius: 0.65rem;
+		padding: 0.65rem 0.75rem;
+		font: inherit;
+		outline: none;
+	}
+
+	input:focus {
+		border-color: #94a3b8;
+	}
+
+	label small {
+		color: #64748b;
+		font-weight: 600;
+	}
+
+	.divider {
+		display: flex;
+		align-items: center;
+		text-align: center;
+		margin: 0.2rem 0;
+		color: #94a3b8;
+		font-size: 0.85rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+	}
+
+	.divider::before,
+	.divider::after {
+		content: '';
+		flex: 1;
+		border-bottom: 1px solid #e2e8f0;
+	}
+
+	.divider span {
+		padding: 0 0.6rem;
+	}
+
+	.pay-btn {
+		margin-top: 0.35rem;
+		border: 1px solid transparent;
+		border-radius: 999px;
+		padding: 0.72rem 1rem;
+		font-weight: 700;
+		background: #0f172a;
+		color: #ffffff;
+		cursor: pointer;
+	}
+
+	.pay-btn:hover {
+		filter: brightness(1.08);
+	}
+
+	.manual-btn {
+		background: #f8fafc;
+		color: #0f172a;
+		border: 1px solid #dbe1e8;
+		text-align: center;
+		text-decoration: none;
+		display: block;
+	}
+
+	.manual-btn:hover {
+		background: #f1f5f9;
+		border-color: #cbd5e1;
+		filter: none;
+	}
+
+	.paypal-btn {
+		background: #ffc439;
+		color: #111827;
+	}
+
+	.paypal-container {
+		display: none;
+		margin-top: 0.6rem;
+	}
+
+	.paypal-status {
+		margin: 0.2rem 0 0;
+		font-size: 0.9rem;
+		font-weight: 600;
+		color: #334155;
+	}
+
+	.paypal-status[data-type='error'] {
+		color: #b91c1c;
+	}
+
+	.checkout-notes {
+		display: flex;
+		gap: 0.5rem;
+		flex-wrap: wrap;
+	}
+
+	.help {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: 0.75rem;
+		flex-wrap: wrap;
+	}
+
+	.help p {
+		margin: 0;
+		font-weight: 700;
+		color: #334155;
+	}
+
+	.help a {
+		text-decoration: none;
+		font-weight: 700;
+		color: #0f172a;
+	}
+
+	@media (max-width: 900px) {
+		.checkout-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.checkout-header,
+		.card,
+		.help {
+			padding: 1rem;
+		}
+	}
+</style>

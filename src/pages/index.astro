@@ -3,25 +3,15 @@ import Layout from '../layouts/Layout.astro';
 
 const offers = [
 	{
-		title: 'Música Personalizada',
-		description:
-			'Crea una canción única para celebrar momentos especiales con tecnología de IA.',
-		price: 'US$47',
-		oldPrice: 'US$65',
-		discount: '28% OFF',
-		href: '/musica',
-		features: ['Entrega en hasta 24h', '100% única y exclusiva', 'Revisiones incluidas'],
-		cta: 'Crear Mi Música',
-	},
-	{
 		title: 'Pack Completo de Prompts',
 		description:
-			'Accede a prompts listos para Instagram y contenido viral, con guía completa y updates.',
-		price: 'US$97',
-		oldPrice: 'US$135',
-		href: '/prompts',
-		features: ['Prompts exclusivos', 'Guía completa', 'Actualizaciones gratuitas'],
-		cta: 'Comprar Ahora',
+			'Accede a los mejores prompts listos para Instagram, TikTok y contenido viral.',
+		price: 'US$1',
+		oldPrice: 'US$15',
+		discount: '93% OFF',
+		href: '/compra',
+		features: ['Prompts exclusivos', 'Acceso inmediato', 'Guía completa'],
+		cta: 'Comprar Ahora por $1',
 	},
 ];
 
@@ -33,8 +23,8 @@ const socialStats = [
 
 const perks = [
 	{
-		title: 'Entrega Rápida',
-		text: 'Música entregada en hasta 24 horas y prompts con acceso inmediato.',
+		title: 'Acceso Inmediato',
+		text: 'Recibe todo el pack de prompts en tu correo al instante tras realizar la compra.',
 	},
 	{
 		title: 'Calidad Premium',
@@ -48,22 +38,22 @@ const perks = [
 
 const testimonials = [
 	{
-		name: 'Pedro Henrique',
-		meta: 'Belo Horizonte, MG',
+		name: 'Carlos Ruiz',
+		meta: 'Creador de Contenido',
 		quote:
-			'Hice una música para pedir matrimonio y fue emocionante. El resultado superó todo lo que esperaba.',
+			'Este pack de prompts me ahorró muchísimas horas de trabajo. Las ideas que genera la IA son increíbles.',
 	},
 	{
 		name: 'Amanda Reis',
 		meta: 'Influencer Digital',
 		quote:
-			'Los prompts son increíbles. Mis fotos quedaron con un nivel profesional en pocos minutos.',
+			'Mis copys y guiones quedaron con un nivel profesional en pocos minutos. ¡Súper recomendado!',
 	},
 	{
 		name: 'Juliana Santos',
-		meta: 'Curitiba, PR',
+		meta: 'Especialista en Marketing',
 		quote:
-			'Pedí una canción para el cumpleaños de mi papá y logramos un momento inolvidable en familia.',
+			'Por solo un dólar, el valor que aporta este pack es ridículo. Totalmente recomendado para agencias.',
 	},
 ];
 ---
@@ -71,14 +61,13 @@ const testimonials = [
 <Layout>
 	<div class="home">
 		<section class="hero" aria-label="Hero principal">
-			<p class="hero-kicker">Música & Prompts con IA</p>
-			<h1>Crea música personalizada o domina prompts virales</h1>
+			<p class="hero-kicker">Prompts Profesionales para IA</p>
+			<h1>Domina la creación de contenido con nuestro Pack de Prompts</h1>
 			<p class="hero-lead">
-				Convierte tus ideas en contenido único con entregas rápidas, calidad premium y soporte dedicado.
+				Convierte tus ideas en contenido viral con acceso inmediato, calidad premium y resultados garantizados. Empieza hoy por solo $1.
 			</p>
 			<div class="hero-actions">
-				<a href="/musica" class="btn primary">Crear Música</a>
-				<a href="/prompts" class="btn secondary">Ver Prompts</a>
+				<a href="/compra" class="btn primary">Comprar el Pack a $1</a>
 			</div>
 		</section>
 
@@ -122,7 +111,7 @@ const testimonials = [
 		</section>
 
 		<section class="perks" aria-label="Por qué elegirnos">
-			<h2>Nagy's Shop</h2>
+			<h2>Solene Prompt</h2>
 			<p>Calidad, rapidez y soporte dedicado en cada entrega.</p>
 			<div class="perks-grid">
 				{
@@ -229,7 +218,8 @@ const testimonials = [
 
 	.offers {
 		display: grid;
-		grid-template-columns: repeat(2, minmax(0, 1fr));
+		grid-template-columns: minmax(0, 600px);
+		justify-content: center;
 		gap: 1rem;
 	}
 
