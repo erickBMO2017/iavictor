@@ -75,7 +75,7 @@ const faqs = [
 		<section class="faq-contact" aria-label="Contacto soporte">
 			<h2>¿No encontraste tu respuesta?</h2>
 			<p>Escríbenos por WhatsApp y con gusto te ayudamos.</p>
-			<a href="https://wa.me/18438226879" target="_blank" rel="noreferrer noopener">Hablar por WhatsApp</a>
+			<a href="https://wa.me/18438226879" class="btn primary" target="_blank" rel="noreferrer noopener">Hablar por WhatsApp</a>
 		</section>
 	</div>
 </Layout>
@@ -84,59 +84,81 @@ const faqs = [
 	.faq-page {
 		display: flex;
 		flex-direction: column;
-		gap: 1.1rem;
+		gap: 2rem;
+		padding: 1rem 0;
 	}
 
 	.faq-hero,
-	.faq-list,
 	.faq-contact {
-		border: 1px solid #e2e8f0;
+		text-align: center;
+		padding: 2rem 1rem;
+		border: 1px solid color-mix(in srgb, var(--pizarra-profunda) 15%, transparent);
 		border-radius: 1rem;
-		padding: 1.25rem;
-		background: #ffffff;
 	}
 
 	.kicker {
 		margin: 0;
 		font-weight: 700;
-		color: #334155;
+		color: var(--terracota-solene);
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
 	}
 
 	h1 {
 		margin: 0.35rem 0 0;
-		font-size: clamp(1.7rem, 3.5vw, 2.35rem);
+		font-size: clamp(2rem, 4.5vw, 3rem);
 		line-height: 1.2;
-		color: #0f172a;
 	}
 
 	.faq-hero p {
-		margin: 0.75rem 0 0;
-		color: #475569;
+		margin: 1rem auto 0;
+		color: var(--carbon-cinematografico);
 		line-height: 1.6;
+		max-width: 62ch;
+		font-size: 1.1rem;
 	}
 
 	.faq-list {
 		display: flex;
 		flex-direction: column;
-		gap: 0.65rem;
+		gap: 0.75rem;
 	}
 
 	.faq-item {
-		border: 1px solid #e2e8f0;
+		border: 1px solid color-mix(in srgb, var(--pizarra-profunda) 15%, transparent);
 		border-radius: 0.85rem;
-		padding: 0.8rem 0.9rem;
-		background: #ffffff;
+		padding: 1rem 1.25rem;
+		background: var(--blanco-editorial);
+		transition: border-color 0.2s ease;
 	}
 
 	.faq-item[open] {
-		background: #f8fafc;
+		border-color: var(--oro-kodak);
 	}
 
 	summary {
 		cursor: pointer;
 		font-weight: 700;
-		color: #0f172a;
+		font-family: 'Oswald', sans-serif;
+		font-size: 1.1rem;
+		color: var(--pizarra-profunda);
 		list-style: none;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+	
+	summary::after {
+		content: '+';
+		font-size: 1.5rem;
+		font-weight: 400;
+		color: var(--oro-kodak);
+		transition: transform 0.2s ease;
+	}
+	
+	.faq-item[open] summary::after {
+		content: '−';
+		transform: rotate(180deg);
 	}
 
 	summary::-webkit-details-marker {
@@ -144,44 +166,29 @@ const faqs = [
 	}
 
 	.faq-item p {
-		margin: 0.65rem 0 0;
-		color: #475569;
+		margin: 0.75rem 0 0;
 		line-height: 1.6;
+		color: var(--carbon-cinematografico);
 	}
 
 	h2 {
 		margin: 0;
 		font-size: 1.5rem;
-		color: #0f172a;
 	}
 
 	.faq-contact p {
 		margin: 0.55rem 0 0;
-		color: #475569;
 	}
-
-	.faq-contact a {
-		display: inline-flex;
+	
+	.faq-contact a.btn {
 		margin-top: 1rem;
-		text-decoration: none;
-		padding: 0.68rem 1rem;
-		border-radius: 999px;
-		font-weight: 700;
-		background: #0f172a;
-		color: #ffffff;
-		border: 1px solid transparent;
-		transition: filter 0.2s ease;
-	}
-
-	.faq-contact a:hover {
-		filter: brightness(1.08);
 	}
 
 	@media (max-width: 900px) {
 		.faq-hero,
 		.faq-list,
 		.faq-contact {
-			padding: 1rem;
+			padding: 1.5rem 1rem;
 		}
 	}
 </style>

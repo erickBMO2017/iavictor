@@ -119,8 +119,8 @@ const icons = {
 		top: 0;
 		z-index: 50;
 		backdrop-filter: blur(10px);
-		background: rgba(255, 255, 255, 0.9);
-		border-bottom: 1px solid #e6e8ec;
+		background: color-mix(in srgb, var(--pizarra-profunda) 90%, transparent);
+		border-bottom: 1px solid color-mix(in srgb, var(--blanco-editorial) 10%, transparent);
 	}
 
 	.header-inner {
@@ -138,8 +138,10 @@ const icons = {
 		align-items: center;
 		gap: 0.6rem;
 		text-decoration: none;
-		color: #0f172a;
+		color: var(--blanco-editorial);
 		font-weight: 800;
+		font-family: 'Oswald', sans-serif;
+		text-transform: uppercase;
 	}
 
 	.brand-mark {
@@ -149,9 +151,10 @@ const icons = {
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-		background: #0f172a;
-		color: #ffffff;
+		background: var(--oro-kodak);
+		color: var(--carbon-cinematografico);
 		font-size: 0.95rem;
+		font-weight: bold;
 	}
 
 	.brand-text {
@@ -176,18 +179,16 @@ const icons = {
 		gap: 0.45rem;
 		padding: 0.5rem 0.75rem;
 		border-radius: 999px;
-		border: 1px solid #e2e8f0;
-		background: #ffffff;
-		color: #334155;
+		border: 1px solid color-mix(in srgb, var(--blanco-editorial) 20%, transparent);
+		background: transparent;
+		color: var(--blanco-editorial);
 		font-weight: 600;
 		cursor: pointer;
-		transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+		transition: background-color 0.2s ease, color 0.2s ease;
 	}
 
 	.tool-button:hover {
-		background: #f8fafc;
-		border-color: #cfd8e3;
-		color: #0f172a;
+		background: color-mix(in srgb, var(--blanco-editorial) 10%, transparent);
 	}
 
 	.tool-icon {
@@ -204,7 +205,7 @@ const icons = {
 		padding: 0.5rem 0.8rem;
 		border-radius: 999px;
 		text-decoration: none;
-		color: #334155;
+		color: var(--blanco-editorial);
 		font-weight: 600;
 		border: 1px solid transparent;
 		transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
@@ -218,16 +219,14 @@ const icons = {
 
 	.desktop-nav a:hover,
 	.mobile-nav a:hover {
-		background: #f8fafc;
-		border-color: #e2e8f0;
-		color: #0f172a;
+		background-color: color-mix(in srgb, var(--blanco-editorial) 10%, transparent);
+		color: var(--blanco-editorial);
 	}
 
 	.desktop-nav a.active,
 	.mobile-nav a.active {
-		background: #f8fafc;
-		border-color: #dbe1e8;
-		color: #0f172a;
+		color: var(--oro-kodak);
+		border-color: var(--oro-kodak);
 	}
 
 	.cta {
@@ -240,9 +239,9 @@ const icons = {
 		border-radius: 999px;
 		font-weight: 700;
 		font-size: 0.95rem;
-		color: #ffffff;
-		background: linear-gradient(135deg, #111827, #374151);
-		box-shadow: 0 8px 20px rgba(17, 24, 39, 0.2);
+		color: var(--carbon-cinematografico);
+		background: var(--oro-kodak);
+		box-shadow: 0 8px 20px rgba(229, 169, 60, 0.2);
 	}
 
 	.cta-icon {
@@ -256,8 +255,8 @@ const icons = {
 
 	.menu-toggle {
 		display: none;
-		border: 1px solid #dbe1e8;
-		background: #ffffff;
+		border: 1px solid color-mix(in srgb, var(--blanco-editorial) 40%, transparent);
+		background: transparent;
 		border-radius: 0.6rem;
 		padding: 0.45rem;
 		cursor: pointer;
@@ -267,7 +266,7 @@ const icons = {
 		display: block;
 		width: 1.1rem;
 		height: 2px;
-		background: #0f172a;
+		background: var(--blanco-editorial);
 		margin: 3px 0;
 	}
 
@@ -307,6 +306,10 @@ const icons = {
 			display: inline-block;
 		}
 
+		.site-header[data-open] {
+			background: var(--pizarra-profunda);
+		}
+		
 		.site-header[data-open] .mobile-nav {
 			display: flex;
 		}

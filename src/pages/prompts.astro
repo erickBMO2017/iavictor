@@ -185,83 +185,101 @@ const testimonials = [
 	.prompts-page {
 		display: flex;
 		flex-direction: column;
-		gap: 1.2rem;
+		gap: 2rem;
+		padding: 1rem 0;
 	}
 
-	.hero,
+	.hero {
+		text-align: center;
+		padding: 2rem 1rem;
+		background-color: var(--blanco-editorial);
+		border: 1px solid color-mix(in srgb, var(--pizarra-profunda) 15%, transparent);
+		border-radius: 1rem;
+	}
+	
 	.samples,
 	.included,
 	.how,
 	.pack,
 	.testimonials {
-		border: 1px solid #e2e8f0;
-		border-radius: 1rem;
-		padding: 1.25rem;
-		background: #ffffff;
+		padding: 2rem 1rem;
+		text-align: center;
 	}
 
 	.kicker {
 		margin: 0;
 		font-weight: 700;
-		color: #334155;
+		color: var(--terracota-solene);
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
 	}
 
 	h1 {
 		margin: 0.35rem 0 0;
-		font-size: clamp(1.7rem, 3.5vw, 2.35rem);
+		font-size: clamp(2rem, 4.5vw, 3rem);
 		line-height: 1.2;
-		color: #0f172a;
 	}
-
+	
 	h2 {
 		margin: 0;
-		font-size: 1.5rem;
-		color: #0f172a;
+		font-size: 1.75rem;
 	}
 
 	h3 {
 		margin: 0;
-		font-size: 1rem;
-		color: #0f172a;
+		font-size: 1.1rem;
 	}
 
 	p {
-		color: #475569;
 		line-height: 1.6;
+		color: var(--carbon-cinematografico);
+		max-width: 65ch;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	
+	.hero p {
+		font-size: 1.1rem;
+		margin-top: 1rem;
 	}
 
 	.price-box {
 		display: inline-flex;
 		align-items: center;
-		gap: 0.55rem;
-		margin-top: 0.8rem;
+		gap: 0.75rem;
+		margin-top: 1rem;
 		flex-wrap: wrap;
+		background: var(--carbon-cinematografico);
+		color: var(--blanco-editorial);
+		padding: 0.5rem 1rem;
+		border-radius: 0.75rem;
 	}
 
 	.old {
 		text-decoration: line-through;
-		color: #94a3b8;
+		color: color-mix(in srgb, var(--blanco-editorial) 50%, transparent);
 		font-weight: 700;
 	}
 
 	.price-box strong {
-		font-size: 1.45rem;
-		color: #0f172a;
+		font-size: 1.75rem;
+		font-family: 'Oswald', sans-serif;
 	}
 
 	.badge {
-		padding: 0.22rem 0.5rem;
+		padding: 0.25rem 0.6rem;
 		border-radius: 999px;
-		font-size: 0.72rem;
+		font-size: 0.75rem;
 		font-weight: 800;
-		color: #ffffff;
-		background: #ef4444;
+		letter-spacing: 0.02em;
+		color: var(--carbon-cinematografico);
+		background: var(--oro-kodak);
 	}
 
 	.payment {
-		margin-top: 0.6rem;
+		margin-top: 0.8rem;
 		font-weight: 700;
-		color: #334155;
+		color: var(--carbon-cinematografico);
 	}
 
 	.btn {
@@ -269,45 +287,54 @@ const testimonials = [
 		align-items: center;
 		justify-content: center;
 		text-decoration: none;
-		padding: 0.68rem 1rem;
+		padding: 0.8rem 1.75rem;
 		border-radius: 999px;
 		font-weight: 700;
-		border: 1px solid transparent;
-		transition: filter 0.2s ease;
+		border: 2px solid transparent;
+		transition: transform 0.2s ease;
 		margin-top: 1rem;
+		font-family: 'Montserrat', sans-serif;
 	}
 
 	.btn.primary {
-		background: #0f172a;
-		color: #ffffff;
+		background: var(--oro-kodak);
+		color: var(--carbon-cinematografico);
 	}
-
+	
 	.btn:hover {
-		filter: brightness(1.08);
+		transform: scale(1.03);
 	}
 
 	small {
 		display: block;
-		margin-top: 0.65rem;
-		color: #64748b;
+		margin-top: 0.75rem;
+		color: color-mix(in srgb, var(--carbon-cinematografico) 70%, transparent);
 		font-weight: 600;
 	}
 
-	.samples-grid {
+	.samples-grid,
+	.included-grid,
+	.how-grid,
+	.testimonials-grid {
 		display: grid;
 		grid-template-columns: repeat(3, minmax(0, 1fr));
-		gap: 0.8rem;
-		margin-top: 1rem;
+		gap: 1rem;
+		margin-top: 1.5rem;
+		text-align: left;
+	}
+	
+	.included p,
+	.pack p {
+		margin: 0.5rem 0 0;
 	}
 
 	.sample-card,
 	.included-card,
-	.step-card,
-	.testimonial-card {
-		border: 1px solid #e2e8f0;
+	.step-card {
+		border: 1px solid color-mix(in srgb, var(--pizarra-profunda) 15%, transparent);
 		border-radius: 0.85rem;
-		padding: 1rem;
-		background: #ffffff;
+		padding: 1.25rem;
+		background: var(--blanco-editorial);
 	}
 
 	.image-placeholder {
@@ -316,75 +343,115 @@ const testimonials = [
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		background: #f1f5f9;
-		color: #64748b;
+		background: color-mix(in srgb, var(--pizarra-profunda) 10%, transparent);
+		color: var(--pizarra-profunda);
 		font-weight: 700;
-		margin-bottom: 0.6rem;
-	}
-
-	.included p,
-	.pack p {
-		margin: 0.5rem 0 0;
-	}
-
-	.included-grid,
-	.how-grid,
-	.testimonials-grid {
-		display: grid;
-		grid-template-columns: repeat(3, minmax(0, 1fr));
-		gap: 0.8rem;
-		margin-top: 1rem;
+		margin-bottom: 0.75rem;
 	}
 
 	.included-card p,
 	.step-card p,
 	.testimonial-card p {
 		margin: 0.55rem 0 0;
+		color: color-mix(in srgb, var(--carbon-cinematografico) 80%, transparent);
 	}
 
 	.step-number {
-		display: inline-flex;
-		font-weight: 800;
-		font-size: 0.88rem;
-		color: #0f172a;
-		background: #f1f5f9;
-		border-radius: 999px;
-		padding: 0.2rem 0.55rem;
-		margin-bottom: 0.6rem;
+		display: inline-block;
+		font-weight: 700;
+		font-family: 'Oswald', sans-serif;
+		color: var(--carbon-cinematografico);
+		background: color-mix(in srgb, var(--oro-kodak) 40%, transparent);
+		border-radius: 0.5rem;
+		padding: 0.1rem 0.6rem;
+		margin-bottom: 0.75rem;
+	}
+	
+	.pack {
+		background: var(--carbon-cinematografico);
+		color: var(--blanco-editorial);
+		border-radius: 1rem;
+	}
+	
+	.pack h2, .pack p, .pack li, .pack strong {
+		color: var(--blanco-editorial);
+	}
+	
+	.pack .old {
+		color: color-mix(in srgb, var(--blanco-editorial) 50%, transparent);
+	}
+	
+	.pack .btn.primary {
+		background: var(--oro-kodak);
+		color: var(--carbon-cinematografico);
 	}
 
 	.pack ul {
-		margin: 0.9rem 0 0;
-		padding-left: 1.2rem;
+		margin: 1.5rem auto 0;
+		padding: 0;
+		list-style: none;
 		display: grid;
 		grid-template-columns: repeat(2, minmax(0, 1fr));
-		gap: 0.5rem 1rem;
-		color: #334155;
+		gap: 0.75rem 1rem;
+		max-width: 600px;
+		text-align: left;
+	}
+	
+	.pack ul li {
+		padding-left: 1.5rem;
+		position: relative;
+	}
+	
+	.pack ul li::before {
+		content: '✓';
+		position: absolute;
+		left: 0;
+		top: 0;
+		color: var(--oro-kodak);
 	}
 
 	.pack-footer {
-		margin-top: 1rem;
+		margin-top: 1.5rem;
+		padding-top: 1.5rem;
+		border-top: 1px solid color-mix(in srgb, var(--blanco-editorial) 20%, transparent);
 		display: flex;
 		align-items: center;
-		justify-content: space-between;
-		gap: 0.7rem;
+		justify-content: center;
+		gap: 1.5rem;
 		flex-wrap: wrap;
+	}
+	
+	.pack-footer .price-box {
+		background: none;
 	}
 
 	.testimonial-card {
+		border: 1px solid color-mix(in srgb, var(--pizarra-profunda) 15%, transparent);
+		border-radius: 0.85rem;
+		padding: 1.25rem;
 		display: flex;
 		flex-direction: column;
 		gap: 0.8rem;
+		background-color: var(--blanco-editorial);
+	}
+	
+	.testimonial-card p {
+		font-style: italic;
+		margin: 0;
 	}
 
 	.testimonial-card strong {
 		display: block;
-		color: #0f172a;
 	}
 
 	.testimonial-card span {
-		color: #64748b;
+		color: color-mix(in srgb, var(--carbon-cinematografico) 60%, transparent);
 		font-size: 0.92rem;
+	}
+
+	.testimonial-card div {
+		margin-top: auto;
+		padding-top: 0.5rem;
 	}
 
 	@media (max-width: 900px) {
@@ -402,7 +469,7 @@ const testimonials = [
 		.how,
 		.pack,
 		.testimonials {
-			padding: 1rem;
+			padding: 1.5rem 1rem;
 		}
 	}
 </style>

@@ -22,7 +22,20 @@ import Footer from '../components/Footer.astro';
 	</body>
 </html>
 
-<style>
+<style is:global>
+	/* Import Fonts */
+	@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Oswald:wght@700&display=swap');
+
+	/* Color Palette Variables */
+	:root {
+		--blanco-editorial: #F8F6F0;
+		--carbon-cinematografico: #1A1C20;
+		--oro-kodak: #E5A93C;
+		--terracota-solene: #B84A39;
+		--pizarra-profunda: #2C3E50;
+	}
+
+	/* Base Styles */
 	html,
 	body {
 		margin: 0;
@@ -33,7 +46,9 @@ import Footer from '../components/Footer.astro';
 	body {
 		display: flex;
 		flex-direction: column;
-		font-family: Arial, sans-serif;
+		background-color: var(--blanco-editorial);
+		color: var(--carbon-cinematografico);
+		font-family: 'Montserrat', sans-serif;
 	}
 
 	main {
@@ -42,5 +57,21 @@ import Footer from '../components/Footer.astro';
 		margin: 0 auto;
 		padding: 2rem 1rem;
 		flex: 1;
+	}
+
+	/* Typography */
+	h1, h2, h3, h4, h5, h6 {
+		font-family: 'Oswald', sans-serif;
+		text-transform: uppercase;
+		color: var(--pizarra-profunda);
+	}
+
+	a {
+		color: var(--oro-kodak);
+		text-decoration: none;
+	}
+
+	a:hover {
+		text-decoration: underline;
 	}
 </style>

@@ -39,13 +39,13 @@ import Layout from '../layouts/Layout.astro';
 	}
 
 	.success-card {
-		background: #ffffff;
-		border: 1px solid #e2e8f0;
+		background: var(--blanco-editorial);
+		border: 1px solid color-mix(in srgb, var(--pizarra-profunda) 15%, transparent);
 		border-radius: 1.5rem;
-		padding: 3rem 2rem;
+		padding: 2rem 1.5rem;
 		max-width: 500px;
 		text-align: center;
-		box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
+		box-shadow: 0 10px 30px -15px color-mix(in srgb, var(--pizarra-profunda) 20%, transparent);
 	}
 
 	.icon-wrapper {
@@ -54,8 +54,8 @@ import Layout from '../layouts/Layout.astro';
 		justify-content: center;
 		width: 4rem;
 		height: 4rem;
-		background: #ecfdf5;
-		color: #10b981;
+		background: color-mix(in srgb, var(--oro-kodak) 20%, transparent);
+		color: var(--oro-kodak);
 		border-radius: 50%;
 		margin-bottom: 1.5rem;
 	}
@@ -68,16 +68,15 @@ import Layout from '../layouts/Layout.astro';
 	h1 {
 		margin: 0;
 		font-size: 1.8rem;
-		color: #0f172a;
 	}
 
 	.message {
 		margin: 1rem 0 2rem;
-		color: #475569;
 		line-height: 1.6;
+		color: var(--carbon-cinematografico);
 	}
 
-	.download-btn {
+	.download-section .btn {
 		width: 100%;
 		padding: 1rem;
 		font-size: 1.1rem;
@@ -93,31 +92,35 @@ import Layout from '../layouts/Layout.astro';
 	.note {
 		margin-top: 2rem;
 		font-size: 0.9rem;
-		color: #64748b;
+		color: color-mix(in srgb, var(--carbon-cinematografico) 70%, transparent);
 	}
 
+	/* Use global link styles from Layout.astro */
 	.note a {
-		color: #0f172a;
 		font-weight: 600;
 		text-decoration: underline;
 	}
 
-	/* Importamos los estilos de botones de tu web */
+	/* Buttons are styled via global .btn classes */
 	.btn {
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
 		text-decoration: none;
+		padding: 0.8rem 1.75rem;
 		border-radius: 999px;
 		font-weight: 700;
-		border: 1px solid transparent;
-		transition: filter 0.2s ease;
+		border: 2px solid transparent;
+		transition: transform 0.2s ease;
+		font-family: 'Montserrat', sans-serif;
 	}
-	.btn.primary {
-		background: #0f172a;
-		color: #ffffff;
-	}
+	
 	.btn:hover {
-		filter: brightness(1.1);
+		transform: scale(1.03);
+	}
+
+	.btn.primary {
+		background: var(--oro-kodak);
+		color: var(--carbon-cinematografico);
 	}
 </style>

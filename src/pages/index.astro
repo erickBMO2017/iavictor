@@ -148,44 +148,44 @@ const testimonials = [
 	.home {
 		display: flex;
 		flex-direction: column;
-		gap: 1.75rem;
+		gap: 2rem;
+		padding: 1rem 0;
 	}
 
-	.hero,
-	.social-proof,
-	.perks,
-	.testimonials {
-		padding: 1.4rem;
-		border: 1px solid #e2e8f0;
-		border-radius: 1rem;
-		background: #ffffff;
+	.hero {
+		text-align: center;
+		padding: 2rem 1rem;
 	}
 
 	.hero-kicker {
 		margin: 0;
 		font-weight: 700;
-		color: #334155;
+		color: var(--terracota-solene);
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
 	}
 
 	h1 {
 		margin: 0.35rem 0 0;
-		font-size: clamp(1.7rem, 3.6vw, 2.4rem);
+		font-size: clamp(2rem, 4.5vw, 3rem);
 		line-height: 1.2;
-		color: #0f172a;
+		/* The color is inherited from the global style (pizarra-profunda) */
 	}
 
 	.hero-lead {
-		margin: 0.8rem 0 0;
-		color: #475569;
+		margin: 1rem auto 0;
+		color: var(--carbon-cinematografico);
 		line-height: 1.6;
 		max-width: 62ch;
+		font-size: 1.1rem;
 	}
 
 	.hero-actions {
-		margin-top: 1rem;
+		margin-top: 1.5rem;
 		display: flex;
 		gap: 0.6rem;
 		flex-wrap: wrap;
+		justify-content: center;
 	}
 
 	.btn {
@@ -193,27 +193,28 @@ const testimonials = [
 		align-items: center;
 		justify-content: center;
 		text-decoration: none;
-		padding: 0.65rem 1rem;
+		padding: 0.8rem 1.75rem;
 		border-radius: 999px;
 		font-weight: 700;
-		border: 1px solid transparent;
-		transition: filter 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+		border: 2px solid transparent;
+		transition: transform 0.2s ease;
+		font-family: 'Montserrat', sans-serif;
+	}
+	
+	.btn:hover {
+		transform: scale(1.03);
 	}
 
 	.btn.primary {
-		background: #0f172a;
-		color: #ffffff;
+		background: var(--oro-kodak);
+		color: var(--carbon-cinematografico);
 	}
 
 	.btn.secondary,
 	.btn.ghost {
-		background: #ffffff;
-		border-color: #dbe1e8;
-		color: #0f172a;
-	}
-
-	.btn:hover {
-		filter: brightness(1.05);
+		background: transparent;
+		border-color: var(--pizarra-profunda);
+		color: var(--pizarra-profunda);
 	}
 
 	.offers {
@@ -221,16 +222,18 @@ const testimonials = [
 		grid-template-columns: minmax(0, 600px);
 		justify-content: center;
 		gap: 1rem;
+		padding: 1rem 0;
 	}
 
 	.offer-card {
-		border: 1px solid #e2e8f0;
+		border: 1px solid color-mix(in srgb, var(--pizarra-profunda) 15%, transparent);
 		border-radius: 1rem;
-		padding: 1.25rem;
-		background: #ffffff;
+		padding: 1.5rem;
+		background: var(--blanco-editorial);
 		display: flex;
 		flex-direction: column;
 		gap: 0.8rem;
+		box-shadow: 0 10px 30px -15px color-mix(in srgb, var(--pizarra-profunda) 20%, transparent);
 	}
 
 	.offer-card h2,
@@ -238,28 +241,29 @@ const testimonials = [
 	.perks h2,
 	.testimonials h2 {
 		margin: 0;
-		font-size: 1.35rem;
-		color: #0f172a;
+		font-size: 1.5rem;
+		/* Color is inherited */
 	}
 
 	.offer-description,
 	.social-proof p,
 	.perks > p {
 		margin: 0;
-		color: #475569;
+		color: var(--carbon-cinematografico);
 		line-height: 1.55;
 	}
 
 	.offer-card ul {
 		margin: 0;
 		padding-left: 1.2rem;
-		color: #334155;
+		color: var(--carbon-cinematografico);
 		display: grid;
 		gap: 0.35rem;
 	}
 
 	.offer-footer {
 		margin-top: auto;
+		padding-top: 1rem;
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
@@ -275,25 +279,33 @@ const testimonials = [
 	}
 
 	.price {
-		font-size: 1.2rem;
+		font-size: 1.5rem;
 		font-weight: 800;
-		color: #0f172a;
+		font-family: 'Oswald', sans-serif;
+		color: var(--carbon-cinematografico);
 	}
 
 	.old-price {
 		text-decoration: line-through;
-		color: #94a3b8;
+		color: color-mix(in srgb, var(--carbon-cinematografico) 50%, transparent);
 		font-weight: 600;
 	}
 
 	.badge {
-		padding: 0.22rem 0.45rem;
+		padding: 0.25rem 0.6rem;
 		border-radius: 999px;
-		font-size: 0.72rem;
+		font-size: 0.75rem;
 		font-weight: 800;
 		letter-spacing: 0.02em;
-		color: #ffffff;
-		background: #ef4444;
+		color: var(--blanco-editorial);
+		background: var(--terracota-solene);
+	}
+	
+	.social-proof,
+	.perks,
+	.testimonials {
+		padding: 2rem 1rem;
+		text-align: center;
 	}
 
 	.stats-grid,
@@ -301,46 +313,49 @@ const testimonials = [
 	.testimonials-grid {
 		display: grid;
 		grid-template-columns: repeat(3, minmax(0, 1fr));
-		gap: 0.8rem;
-		margin-top: 1rem;
+		gap: 1rem;
+		margin-top: 1.5rem;
+		text-align: left;
 	}
 
 	.stat-item,
 	.perk-card,
 	.testimonial-card {
-		border: 1px solid #e2e8f0;
+		border: 1px solid color-mix(in srgb, var(--pizarra-profunda) 15%, transparent);
 		border-radius: 0.85rem;
-		padding: 1rem;
-		background: #ffffff;
+		padding: 1.25rem;
+		background: var(--blanco-editorial);
 	}
 
 	.stat-item {
 		display: flex;
 		flex-direction: column;
 		gap: 0.22rem;
+		text-align: center;
 	}
 
 	.stat-item strong {
-		font-size: 1.35rem;
+		font-family: 'Oswald', sans-serif;
+		font-size: 1.75rem;
 		line-height: 1.1;
-		color: #0f172a;
+		color: var(--terracota-solene);
 	}
 
 	.stat-item span {
-		color: #475569;
+		color: var(--carbon-cinematografico);
 		font-weight: 600;
 	}
 
 	.perk-card h3 {
 		margin: 0;
-		color: #0f172a;
-		font-size: 1rem;
+		font-size: 1.1rem;
+		/* Color is inherited */
 	}
 
 	.perk-card p,
 	.testimonial-card p {
 		margin: 0.55rem 0 0;
-		color: #475569;
+		color: color-mix(in srgb, var(--carbon-cinematografico) 80%, transparent);
 		line-height: 1.55;
 	}
 
@@ -348,20 +363,34 @@ const testimonials = [
 		display: flex;
 		flex-direction: column;
 		gap: 0.85rem;
+		background-color: var(--carbon-cinematografico);
+		color: var(--blanco-editorial);
 	}
 
+	.testimonial-card p {
+		margin: 0;
+		color: var(--blanco-editorial);
+		font-style: italic;
+	}
+	
 	.testimonial-card strong {
 		display: block;
-		color: #0f172a;
+		color: var(--blanco-editorial);
 	}
-
+	
 	.testimonial-card span {
-		color: #64748b;
+		color: color-mix(in srgb, var(--blanco-editorial) 60%, transparent);
 		font-size: 0.9rem;
 	}
 
+	.testimonial-card div {
+		margin-top: auto;
+		padding-top: 0.5rem;
+		border-top: 1px solid color-mix(in srgb, var(--blanco-editorial) 20%, transparent);
+	}
+
+
 	@media (max-width: 900px) {
-		.offers,
 		.stats-grid,
 		.perks-grid,
 		.testimonials-grid {
@@ -373,7 +402,7 @@ const testimonials = [
 		.perks,
 		.testimonials,
 		.offer-card {
-			padding: 1rem;
+			padding: 1.5rem 1rem;
 		}
 	}
 </style>

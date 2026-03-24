@@ -44,8 +44,9 @@
 <style>
 	.site-footer {
 		margin-top: auto;
-		border-top: 1px solid #e2e8f0;
-		background: #ffffff;
+		background: var(--pizarra-profunda);
+		color: var(--blanco-editorial);
+		border-top: 1px solid color-mix(in srgb, var(--blanco-editorial) 20%, transparent);
 	}
 
 	.footer-inner {
@@ -58,56 +59,62 @@
 	}
 
 	.footer-cta {
-		padding: 1.2rem;
-		border: 1px solid #e2e8f0;
+		padding: 1.5rem;
 		border-radius: 1rem;
-		background: #f8fafc;
+		background: var(--carbon-cinematografico);
+		text-align: center;
 	}
 
 	.footer-cta h2 {
 		margin: 0;
-		font-size: 1.35rem;
+		font-size: 1.5rem;
 		line-height: 1.25;
-		color: #0f172a;
+		color: var(--blanco-editorial);
+		font-family: 'Oswald', sans-serif;
+		text-transform: uppercase;
 	}
 
 	.footer-cta p {
 		margin: 0.55rem 0 0;
-		color: #475569;
+		color: color-mix(in srgb, var(--blanco-editorial) 80%, transparent);
+		max-width: 60ch;
+		margin-left: auto;
+		margin-right: auto;
 	}
 
 	.cta-actions {
 		display: flex;
 		gap: 0.65rem;
-		margin-top: 1rem;
+		margin-top: 1.2rem;
 		flex-wrap: wrap;
+		justify-content: center;
 	}
 
 	.footer-btn {
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-		padding: 0.62rem 1rem;
+		padding: 0.75rem 1.5rem;
 		border-radius: 999px;
 		font-weight: 700;
 		text-decoration: none;
 		border: 1px solid transparent;
-		transition: filter 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+		transition: transform 0.2s ease;
+		font-family: 'Montserrat', sans-serif;
+	}
+	
+	.footer-btn:hover {
+		transform: scale(1.03);
 	}
 
 	.footer-btn.primary {
-		background: #0f172a;
-		color: #ffffff;
+		background: var(--blanco-editorial);
+		color: var(--carbon-cinematografico);
 	}
 
 	.footer-btn.secondary {
-		background: #ffffff;
-		border-color: #dbe1e8;
-		color: #0f172a;
-	}
-
-	.footer-btn:hover {
-		filter: brightness(1.05);
+		background: var(--oro-kodak);
+		color: var(--carbon-cinematografico);
 	}
 
 	.footer-grid {
@@ -123,7 +130,9 @@
 		gap: 0.55rem;
 		text-decoration: none;
 		font-weight: 800;
-		color: #0f172a;
+		color: var(--blanco-editorial);
+		font-family: 'Oswald', sans-serif;
+		text-transform: uppercase;
 	}
 
 	.brand-mark {
@@ -133,9 +142,10 @@
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-		background: #0f172a;
-		color: #ffffff;
+		background: var(--oro-kodak);
+		color: var(--carbon-cinematografico);
 		font-size: 0.9rem;
+		font-weight: bold;
 	}
 
 	.brand-name {
@@ -144,7 +154,7 @@
 
 	.footer-brand p {
 		margin: 0.7rem 0 0;
-		color: #475569;
+		color: color-mix(in srgb, var(--blanco-editorial) 70%, transparent);
 		line-height: 1.5;
 	}
 
@@ -160,7 +170,8 @@
 		font-size: 0.9rem;
 		text-transform: uppercase;
 		letter-spacing: 0.06em;
-		color: #0f172a;
+		color: var(--blanco-editorial);
+		font-family: 'Oswald', sans-serif;
 	}
 
 	.footer-links {
@@ -172,25 +183,26 @@
 	.footer-links a,
 	.social-links a,
 	.footer-bottom a {
-		color: #334155;
+		color: color-mix(in srgb, var(--blanco-editorial) 70%, transparent);
 		text-decoration: none;
 		font-weight: 600;
+		transition: color 0.2s ease;
 	}
 
 	.footer-links a:hover,
 	.social-links a:hover,
 	.footer-bottom a:hover {
-		color: #0f172a;
+		color: var(--oro-kodak);
 	}
 
 	.footer-bottom {
 		padding-top: 1rem;
-		border-top: 1px solid #e2e8f0;
+		border-top: 1px solid color-mix(in srgb, var(--blanco-editorial) 20%, transparent);
 		display: flex;
 		justify-content: space-between;
 		gap: 0.75rem;
 		flex-wrap: wrap;
-		color: #64748b;
+		color: color-mix(in srgb, var(--blanco-editorial) 50%, transparent);
 	}
 
 	.footer-bottom p {

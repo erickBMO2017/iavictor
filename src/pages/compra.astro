@@ -215,57 +215,60 @@ const paypalClientId = import.meta.env.PUBLIC_PAYPAL_CLIENT_ID ?? '';
 		width: fit-content;
 		text-decoration: none;
 		font-weight: 700;
-		color: #334155;
+		color: var(--carbon-cinematografico);
 	}
 
 	.back-link:hover {
-		color: #0f172a;
+		color: var(--oro-kodak);
 	}
 
-	.checkout-header,
+	.checkout-header {
+		padding-bottom: 1rem;
+	}
+	
 	.card,
 	.help {
-		border: 1px solid #e2e8f0;
+		border: 1px solid color-mix(in srgb, var(--pizarra-profunda) 15%, transparent);
 		border-radius: 1rem;
 		padding: 1.25rem;
-		background: #ffffff;
+		background: var(--blanco-editorial);
 	}
 
 	.kicker {
 		margin: 0;
 		font-weight: 700;
-		color: #334155;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		color: var(--terracota-solene);
 	}
 
 	h1 {
 		margin: 0.35rem 0 0;
 		font-size: clamp(1.6rem, 3.3vw, 2.2rem);
 		line-height: 1.2;
-		color: #0f172a;
 	}
 
 	.checkout-header p {
 		margin: 0.6rem 0 0;
 		line-height: 1.6;
-		color: #475569;
+		color: var(--carbon-cinematografico);
 	}
 
 	.checkout-grid {
 		display: grid;
 		grid-template-columns: 1.1fr 1fr;
 		gap: 1rem;
+		align-items: flex-start;
 	}
 
 	h2 {
 		margin: 0;
 		font-size: 1.35rem;
-		color: #0f172a;
 	}
 
 	h3 {
 		margin: 0.85rem 0 0;
-		font-size: 1rem;
-		color: #0f172a;
+		font-size: 1.1rem;
 	}
 
 	.order-summary ul {
@@ -273,11 +276,13 @@ const paypalClientId = import.meta.env.PUBLIC_PAYPAL_CLIENT_ID ?? '';
 		padding-left: 1.2rem;
 		display: grid;
 		gap: 0.45rem;
-		color: #334155;
+		color: var(--carbon-cinematografico);
 	}
 
 	.trust-row {
-		margin-top: 1rem;
+		margin-top: 1.5rem;
+		padding-top: 1.5rem;
+		border-top: 1px solid color-mix(in srgb, var(--pizarra-profunda) 15%, transparent);
 		display: flex;
 		gap: 0.55rem;
 		flex-wrap: wrap;
@@ -287,9 +292,8 @@ const paypalClientId = import.meta.env.PUBLIC_PAYPAL_CLIENT_ID ?? '';
 	.checkout-notes span {
 		font-weight: 700;
 		font-size: 0.88rem;
-		color: #334155;
-		background: #f8fafc;
-		border: 1px solid #e2e8f0;
+		color: var(--carbon-cinematografico);
+		background: color-mix(in srgb, var(--oro-kodak) 20%, transparent);
 		border-radius: 999px;
 		padding: 0.28rem 0.55rem;
 	}
@@ -297,7 +301,7 @@ const paypalClientId = import.meta.env.PUBLIC_PAYPAL_CLIENT_ID ?? '';
 	.offer {
 		margin: 0;
 		font-weight: 700;
-		color: #334155;
+		color: var(--terracota-solene);
 	}
 
 	.total-line {
@@ -310,7 +314,6 @@ const paypalClientId = import.meta.env.PUBLIC_PAYPAL_CLIENT_ID ?? '';
 
 	.total-line .label {
 		font-weight: 700;
-		color: #0f172a;
 	}
 
 	.prices {
@@ -322,26 +325,28 @@ const paypalClientId = import.meta.env.PUBLIC_PAYPAL_CLIENT_ID ?? '';
 
 	.old {
 		text-decoration: line-through;
-		color: #94a3b8;
+		color: color-mix(in srgb, var(--carbon-cinematografico) 50%, transparent);
 		font-weight: 700;
 	}
 
 	.prices strong {
 		font-size: 1.45rem;
-		color: #0f172a;
+		font-family: 'Oswald', sans-serif;
 	}
 
 	.badge {
-		padding: 0.22rem 0.5rem;
+		padding: 0.25rem 0.6rem;
 		border-radius: 999px;
-		font-size: 0.72rem;
+		font-size: 0.75rem;
 		font-weight: 800;
-		color: #ffffff;
-		background: #ef4444;
+		color: var(--blanco-editorial);
+		background: var(--terracota-solene);
 	}
 
 	.checkout-form {
 		margin-top: 1rem;
+		padding-top: 1rem;
+		border-top: 1px solid color-mix(in srgb, var(--pizarra-profunda) 15%, transparent);
 		display: flex;
 		flex-direction: column;
 		gap: 0.8rem;
@@ -355,24 +360,26 @@ const paypalClientId = import.meta.env.PUBLIC_PAYPAL_CLIENT_ID ?? '';
 
 	label span {
 		font-weight: 700;
-		color: #0f172a;
 	}
 
 	input {
-		border: 1px solid #dbe1e8;
+		border: 1px solid color-mix(in srgb, var(--pizarra-profunda) 40%, transparent);
 		border-radius: 0.65rem;
-		padding: 0.65rem 0.75rem;
+		padding: 0.75rem;
 		font: inherit;
+		background: var(--blanco-editorial);
+		color: var(--carbon-cinematografico);
 		outline: none;
+		transition: border-color 0.2s ease;
 	}
 
 	input:focus {
-		border-color: #94a3b8;
+		border-color: var(--oro-kodak);
 	}
 
 	label small {
-		color: #64748b;
 		font-weight: 600;
+		font-size: 0.9rem;
 	}
 
 	.divider {
@@ -380,7 +387,7 @@ const paypalClientId = import.meta.env.PUBLIC_PAYPAL_CLIENT_ID ?? '';
 		align-items: center;
 		text-align: center;
 		margin: 0.2rem 0;
-		color: #94a3b8;
+		color: color-mix(in srgb, var(--carbon-cinematografico) 50%, transparent);
 		font-size: 0.85rem;
 		font-weight: 700;
 		text-transform: uppercase;
@@ -391,46 +398,45 @@ const paypalClientId = import.meta.env.PUBLIC_PAYPAL_CLIENT_ID ?? '';
 	.divider::after {
 		content: '';
 		flex: 1;
-		border-bottom: 1px solid #e2e8f0;
+		border-bottom: 1px solid color-mix(in srgb, var(--pizarra-profunda) 20%, transparent);
 	}
 
 	.divider span {
 		padding: 0 0.6rem;
 	}
-
+	
 	.pay-btn {
 		margin-top: 0.35rem;
-		border: 1px solid transparent;
+		border: 2px solid transparent;
 		border-radius: 999px;
-		padding: 0.72rem 1rem;
+		padding: 0.8rem 1rem;
 		font-weight: 700;
-		background: #0f172a;
-		color: #ffffff;
 		cursor: pointer;
-	}
-
-	.pay-btn:hover {
-		filter: brightness(1.08);
-	}
-
-	.manual-btn {
-		background: #f8fafc;
-		color: #0f172a;
-		border: 1px solid #dbe1e8;
 		text-align: center;
 		text-decoration: none;
 		display: block;
+		font-family: 'Montserrat', sans-serif;
+		transition: transform 0.2s ease;
 	}
-
-	.manual-btn:hover {
-		background: #f1f5f9;
-		border-color: #cbd5e1;
-		filter: none;
+	
+	.pay-btn:hover {
+		transform: scale(1.02);
 	}
 
 	.paypal-btn {
 		background: #ffc439;
-		color: #111827;
+		color: var(--carbon-cinematografico);
+		font-size: 1.1rem;
+	}
+
+	.manual-btn {
+		background: transparent;
+		border-color: var(--pizarra-profunda);
+		color: var(--pizarra-profunda);
+	}
+
+	.manual-btn:hover {
+		background-color: color-mix(in srgb, var(--pizarra-profunda) 10%, transparent);
 	}
 
 	.paypal-container {
@@ -442,17 +448,18 @@ const paypalClientId = import.meta.env.PUBLIC_PAYPAL_CLIENT_ID ?? '';
 		margin: 0.2rem 0 0;
 		font-size: 0.9rem;
 		font-weight: 600;
-		color: #334155;
 	}
 
 	.paypal-status[data-type='error'] {
-		color: #b91c1c;
+		color: var(--terracota-solene);
 	}
 
 	.checkout-notes {
 		display: flex;
 		gap: 0.5rem;
 		flex-wrap: wrap;
+		justify-content: center;
+		margin-top: 0.5rem;
 	}
 
 	.help {
@@ -466,13 +473,6 @@ const paypalClientId = import.meta.env.PUBLIC_PAYPAL_CLIENT_ID ?? '';
 	.help p {
 		margin: 0;
 		font-weight: 700;
-		color: #334155;
-	}
-
-	.help a {
-		text-decoration: none;
-		font-weight: 700;
-		color: #0f172a;
 	}
 
 	@media (max-width: 900px) {
