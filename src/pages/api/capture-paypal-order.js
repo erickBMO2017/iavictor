@@ -1,4 +1,5 @@
 // src/pages/api/capture-paypal-order.js
+import { useTranslations, defaultLang } from "../../i18n/ui.js"; // Importa el nuevo helper de i18n
 
 const config = {
   paypal: {
@@ -53,7 +54,15 @@ const getAccessToken = async () => {
   return tokenData.access_token;
 };
 
-async function sendConfirmationEmail(toEmail, buyerName, orderID, siteUrl) {
+async function sendConfirmationEmail(
+  toEmail,
+  buyerName,
+  orderID,
+  siteUrl,
+  emailLang,
+) {
+  const t = useTranslations(emailLang || defaultLang); // Usa el helper de i18n para el contenido del correo
+
   if (!config.resend.apiKey || !toEmail) {
     console.warn(
       "Falta la API key de Resend o el email del destinatario. Omitiendo email.",
@@ -67,24 +76,24 @@ async function sendConfirmationEmail(toEmail, buyerName, orderID, siteUrl) {
   const emailPayload = {
     from: config.resend.from,
     to: [toEmail],
-    bcc: [config.resend.adminEmail],
-    subject: `¡Gracias por tu compra! Tu ${config.product.name} 🚀`,
+    bcc: [config.resend.adminEmail], // Mantener el correo del administrador en BCC
+    subject: `${t("thank_you_message")} ${config.product.name} 🚀`, // Traducir el asunto
     html: `
       <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; color: #334155;">
-        <h2 style="color: #0f172a;">¡Hola, ${buyerName}!</h2>
-        <p>Muchas gracias por tu compra. Tu pago se ha procesado correctamente y tu acceso está listo.</p>
+        <h2 style="color: #0f172a;">${t("hello_buyer", { name: buyerName })}</h2>
+        <p>${t("purchase_success")}</p>
         <div style="background: #f8fafc; border: 1px solid #e2e8f0; padding: 20px; border-radius: 8px; margin: 20px 0;">
-          <h3 style="margin-top: 0; color: #0f172a;">🧾 Recibo de Compra</h3>
-          <p><strong>Producto:</strong> ${config.product.name}</p>
+          <h3 style="margin-top: 0; color: #0f172a;">${t("receipt_title")}</h3>
+          <p><strong>${t("product_name_label")}:</strong> ${config.product.name}</p>
           <p><strong>Total pagado:</strong> ${config.product.price}</p>
-          <p><strong>ID de Orden:</strong> ${orderID}</p>
-          <p><strong>Estado:</strong> Pagado / Completado</p>
+          <p><strong>${t("order_id")}:</strong> ${orderID}</p>
+          <p><strong>${t("status")}:</strong> ${t("paid_completed")}</p>
         </div>
-        <p>Para descargar tu PDF, haz clic en el botón de abajo. Guarda este correo para futuras referencias.</p>
+        <p>${t("download_instructions")}</p>
         <a href="${absoluteDownloadUrl}" style="display: inline-block; background-color: #0f172a; color: #ffffff; padding: 12px 24px; text-decoration: none; border-radius: 999px; font-weight: bold; margin-top: 10px;">
-          Descargar PDF Ahora
+          ${t("download_pdf")}
         </a>
-        <p style="margin-top: 30px; font-size: 0.9em; color: #64748b;">Si tienes algún problema con la descarga, responde a este correo o contáctanos por WhatsApp.</p>
+        <p style="margin-top: 30px; font-size: 0.9em; color: #64748b;">${t("support_message")}</p>
       </div>
     `,
   };
