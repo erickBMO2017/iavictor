@@ -7,16 +7,16 @@ const orderID = Astro.url.searchParams.get('orderID');
 <Layout>
 	<div class="result-page success">
 		<section class="result-card" aria-label="Pago exitoso">
-			<p class="tag">Pago completado</p>
-			<h1>¡Gracias por tu compra!</h1>
-			<p>
+			<p class="tag" data-i18n="successTag">Pago completado</p>
+			<h1 data-i18n="successTitle">¡Gracias por tu compra!</h1>
+			<p data-i18n="successLead">
 				Tu pago fue aprobado correctamente. En breve recibirás acceso a tu contenido en el correo
 				registrado.
 			</p>
-			{orderID && <p class="order">ID de orden: {orderID}</p>}
+			{orderID && <p class="order"><span data-i18n="successOrderPrefix">ID de orden:</span> {orderID}</p>}
 			<div class="actions">
-				<a href="/prompts" class="btn secondary">Volver a Prompts</a>
-				<a href="https://wa.me/18438226879" target="_blank" rel="noreferrer noopener" class="btn primary">Contactar Soporte</a>
+				<a href="/prompts" class="btn secondary" data-i18n="successButton1">Volver a Prompts</a>
+				<a href="https://wa.me/18438226879" target="_blank" rel="noreferrer noopener" class="btn primary" data-i18n="successButton2">Contactar Soporte</a>
 			</div>
 		</section>
 	</div>

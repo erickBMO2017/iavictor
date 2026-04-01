@@ -56,26 +56,26 @@ const faqs = [
 <Layout>
 	<div class="faq-page">
 		<section class="faq-hero" aria-label="Encabezado FAQ">
-			<p class="kicker">Central de Ayuda</p>
-			<h1>Preguntas Frecuentes</h1>
-			<p>Encuentra respuestas a las dudas más comunes sobre nuestros productos y servicios.</p>
+			<p class="kicker" data-i18n="faqHeroKicker">Central de Ayuda</p>
+			<h1 data-i18n="faqHeroTitle">Preguntas Frecuentes</h1>
+			<p data-i18n="faqHeroLead">Encuentra respuestas a las dudas más comunes sobre nuestros productos y servicios.</p>
 		</section>
 
 		<section class="faq-list" aria-label="Listado de preguntas">
 			{
 				faqs.map((item, index) => (
 					<details class="faq-item" open={index === 0}>
-						<summary>{item.q}</summary>
-						<p>{item.a}</p>
+						<summary data-i18n={`faq-${index}-q`}>{item.q}</summary>
+						<p data-i18n={`faq-${index}-a`}>{item.a}</p>
 					</details>
 				))
 			}
 		</section>
 
 		<section class="faq-contact" aria-label="Contacto soporte">
-			<h2>¿No encontraste tu respuesta?</h2>
-			<p>Escríbenos por WhatsApp y con gusto te ayudamos.</p>
-			<a href="https://wa.me/18438226879" class="btn primary" target="_blank" rel="noreferrer noopener">Hablar por WhatsApp</a>
+			<h2 data-i18n="faqContactTitle">¿No encontraste tu respuesta?</h2>
+			<p data-i18n="faqContactLead">Escríbenos por WhatsApp y con gusto te ayudamos.</p>
+			<a href="https://wa.me/18438226879" class="btn primary" target="_blank" rel="noreferrer noopener" data-i18n="faqContactBtn">Hablar por WhatsApp</a>
 		</section>
 	</div>
 </Layout>

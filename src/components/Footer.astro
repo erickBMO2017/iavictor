@@ -1,10 +1,10 @@
 <footer class="site-footer">
 	<div class="footer-inner">
 		<section class="footer-cta" aria-label="Llamado a la acción">
-			<h2>¿Listo para crear algo increíble?</h2>
-			<p>Elige nuestros packs de prompts de IA y empieza a crear contenido ahora mismo.</p>
+			<h2 data-i18n="footerCtaTitle">¿Listo para crear algo increíble?</h2>
+			<p data-i18n="footerCtaText">Elige nuestros packs de prompts de IA y empieza a crear contenido ahora mismo.</p>
 			<div class="cta-actions">
-				<a href="/prompts" class="footer-btn secondary">Ver Prompts</a>
+				<a href="/prompts" class="footer-btn secondary" data-i18n="footerCtaBtn">Ver Prompts</a>
 			</div>
 		</section>
 
@@ -12,31 +12,31 @@
 			<section class="footer-brand" aria-label="Marca">
 				<a class="brand-link" href="/" aria-label="Ir al inicio">
 					<span class="brand-mark">S</span>
-					<span class="brand-name">Solene Prompt</span>
+					<span class="brand-name" data-i18n="brand">Solene Prompt</span>
 				</a>
-				<p>Transformando ideas en realidad con prompts exclusivos para inteligencia artificial.</p>
+				<p data-i18n="footerBrandDesc">Transformando ideas en realidad con prompts exclusivos para inteligencia artificial.</p>
 				<div class="social-links">
-					<a href="https://www.instagram.com/nagys_/" target="_blank" rel="noreferrer noopener">Instagram</a>
-					<a href="https://wa.me/18438226879" target="_blank" rel="noreferrer noopener">WhatsApp</a>
+					<a href="https://www.instagram.com/nagys_/" target="_blank" rel="noreferrer noopener" data-i18n="footerInstagram">Instagram</a>
+					<a href="https://wa.me/18438226879" target="_blank" rel="noreferrer noopener" data-i18n="footerWhatsapp">WhatsApp</a>
 				</div>
 			</section>
 
 			<nav class="footer-links" aria-label="Productos">
-				<h3>Productos</h3>
-				<a href="/prompts">Paquetes de Prompts</a>
+				<h3 data-i18n="footerProductsTitle">Productos</h3>
+				<a href="/prompts" data-i18n="footerProductPrompts">Paquetes de Prompts</a>
 			</nav>
 
 			<nav class="footer-links" aria-label="Soporte">
-				<h3>Soporte</h3>
-				<a href="/faq">Preguntas Frecuentes</a>
-				<a href="https://www.instagram.com/nagys_/" target="_blank" rel="noreferrer noopener">Instagram</a>
-				<a href="https://wa.me/18438226879" target="_blank" rel="noreferrer noopener">WhatsApp</a>
+				<h3 data-i18n="footerSupportTitle">Soporte</h3>
+				<a href="/faq" data-i18n="footerSupportFaq">Preguntas Frecuentes</a>
+				<a href="https://www.instagram.com/nagys_/" target="_blank" rel="noreferrer noopener" data-i18n="footerInstagram">Instagram</a>
+				<a href="https://wa.me/18438226879" target="_blank" rel="noreferrer noopener" data-i18n="footerWhatsapp">WhatsApp</a>
 			</nav>
 		</div>
 
 		<div class="footer-bottom">
-			<p>© 2026 Solene Prompt. Todos los derechos reservados.</p>
-			<a href="https://wa.me/18438226879" target="_blank" rel="noreferrer noopener">Contacto por WhatsApp</a>
+			<p data-i18n="footerCopyright">© 2026 Solene Prompt. Todos los derechos reservados.</p>
+			<a href="https://wa.me/18438226879" target="_blank" rel="noreferrer noopener" data-i18n="footerContact">Contacto por WhatsApp</a>
 		</div>
 	</div>
 </footer>
@@ -50,9 +50,10 @@
 	}
 
 	.footer-inner {
+		width: min(100%, 1100px);
 		max-width: 1100px;
 		margin: 0 auto;
-		padding: 2rem 1rem 1.25rem;
+		padding: 2rem 1.25rem 1.25rem;
 		display: flex;
 		flex-direction: column;
 		gap: 1.6rem;
@@ -61,7 +62,8 @@
 	.footer-cta {
 		padding: 1.5rem;
 		border-radius: 1rem;
-		background: var(--carbon-cinematografico);
+		background: var(--footer-cta-bg);
+		color: var(--footer-cta-color);
 		text-align: center;
 	}
 
@@ -69,14 +71,14 @@
 		margin: 0;
 		font-size: 1.5rem;
 		line-height: 1.25;
-		color: var(--blanco-editorial);
+		color: inherit;
 		font-family: 'Oswald', sans-serif;
 		text-transform: uppercase;
 	}
 
 	.footer-cta p {
 		margin: 0.55rem 0 0;
-		color: color-mix(in srgb, var(--blanco-editorial) 80%, transparent);
+		color: color-mix(in srgb, var(--footer-cta-color) 80%, transparent);
 		max-width: 60ch;
 		margin-left: auto;
 		margin-right: auto;
@@ -210,6 +212,10 @@
 	}
 
 	@media (max-width: 900px) {
+		.footer-inner {
+			padding: 1.2rem 0.9rem 1rem;
+		}
+
 		.footer-grid {
 			grid-template-columns: 1fr;
 			gap: 1.25rem;
@@ -217,6 +223,20 @@
 
 		.footer-cta {
 			padding: 1rem;
+		}
+
+		.footer-cta h2 {
+			font-size: 1.25rem;
+		}
+
+		.footer-cta p {
+			max-width: 100%;
+			font-size: 0.95rem;
+		}
+
+		.footer-bottom {
+			flex-direction: column;
+			align-items: flex-start;
 		}
 	}
 </style>

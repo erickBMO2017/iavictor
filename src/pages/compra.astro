@@ -14,12 +14,12 @@ const paypalClientId = import.meta.env.PUBLIC_PAYPAL_CLIENT_ID ?? '';
 
 <Layout>
 	<div class="checkout-page">
-		<a class="back-link" href="/prompts">← Volver al producto</a>
+		<a class="back-link" href="/prompts" data-i18n="checkoutBack">← Volver al producto</a>
 
 		<section class="checkout-header" aria-label="Resumen compra">
-			<p class="kicker">Revisa tu compra antes de pagar</p>
-			<h1>Pack Completo de Prompts</h1>
-			<p>
+			<p class="kicker" data-i18n="checkoutKicker">Revisa tu compra antes de pagar</p>
+			<h1 data-i18n="checkoutTitle">Pack Completo de Prompts</h1>
+			<p data-i18n="checkoutDescription">
 				Acceso inmediato a todos los prompts, guías y actualizaciones futuras para crear
 				imágenes increíbles con IA.
 			</p>
@@ -27,26 +27,26 @@ const paypalClientId = import.meta.env.PUBLIC_PAYPAL_CLIENT_ID ?? '';
 
 		<div class="checkout-grid">
 			<section class="card order-summary" aria-label="Resumen del pedido">
-				<h2>Pack Completo de Prompts</h2>
-				<h3>Qué está incluido</h3>
-				<ul>
-					{
-						includes.map((item) => (
-							<li>{item}</li>
-						))
-					}
-				</ul>
+			<h2 data-i18n="checkoutTitle">Pack Completo de Prompts</h2>
+			<h3 data-i18n="checkoutIncludesTitle">Qué está incluido</h3>
+			<ul>
+				{
+					includes.map((item, index) => (
+						<li data-i18n={`included-${index}-text`}>{item}</li>
+					))
+				}
+			</ul>
 
-				<div class="trust-row">
-					<span>Pago seguro</span>
-					<span>Acceso inmediato</span>
+			<div class="trust-row">
+				<span data-i18n="checkoutTrustSafe">Pago seguro</span>
+				<span data-i18n="checkoutTrustFast">Acceso inmediato</span>
 				</div>
 			</section>
 
 			<section class="card payment-box" aria-label="Formulario de pago" data-paypal-client-id={paypalClientId}>
-				<p class="offer">Oferta por tiempo limitado</p>
+				<p class="offer" data-i18n="checkoutOffer">Oferta por tiempo limitado</p>
 				<div class="total-line">
-					<span class="label">Total</span>
+					<span class="label" data-i18n="checkoutTotalLabel">Total</span>
 					<div class="prices">
 						<span class="old">US$15</span>
 						<strong>US$1</strong>
@@ -56,35 +56,34 @@ const paypalClientId = import.meta.env.PUBLIC_PAYPAL_CLIENT_ID ?? '';
 
 				<form class="checkout-form" id="checkout-form">
 					<label>
-						<span>Nombre completo</span>
-						<input id="full-name" type="text" placeholder="Tu nombre" />
-					</label>
+					<span data-i18n="checkoutName">Nombre completo</span>
+					<input id="full-name" type="text" placeholder="Tu nombre" />
+				</label>
 
-					<label>
-						<span>Tu email</span>
-						<input id="email" type="email" placeholder="tu@email.com" />
-						<small>Enviaremos el link de acceso a este correo.</small>
-					</label>
+				<label>
+					<span data-i18n="checkoutEmail">Tu email</span>
+					<input id="email" type="email" placeholder="tu@email.com" />
+					<small data-i18n="checkoutEmailHelp">Enviaremos el link de acceso a este correo.</small>
 
-					<button id="paypal-init-btn" type="button" class="pay-btn paypal-btn">Pagar con PayPal</button>
-					<div id="paypal-button-container" class="paypal-container" aria-live="polite"></div>
-					<p id="paypal-status" class="paypal-status" aria-live="polite"></p>
-					
-					<div class="divider"><span>o pago manual</span></div>
-					<a href="https://wa.me/18438226879?text=Hola%2C%20quiero%20comprar%20el%20Pack%20de%20Prompts%20con%20Binance%20o%20Zinli" target="_blank" rel="noreferrer noopener" class="pay-btn manual-btn">
-						Pagar con Binance o Zinli
-					</a>
-					<div class="checkout-notes">
-						<span>Acceso inmediato</span>
-						<span>Pago 100% seguro</span>
+				<button id="paypal-init-btn" type="button" class="pay-btn paypal-btn" data-i18n="checkoutPayBtn">Pagar con PayPal</button>
+				<div id="paypal-button-container" class="paypal-container" aria-live="polite"></div>
+				<p id="paypal-status" class="paypal-status" aria-live="polite"></p>
+				
+				<div class="divider"><span data-i18n="checkoutManualText">o pago manual</span></div>
+				<a href="https://wa.me/18438226879?text=Hola%2C%20quiero%20comprar%20el%20Pack%20de%20Prompts%20con%20Binance%20o%20Zinli" target="_blank" rel="noreferrer noopener" class="pay-btn manual-btn" data-i18n="checkoutManualBtn">
+					Pagar con Binance o Zinli
+				</a>
+				<div class="checkout-notes">
+					<span data-i18n="checkoutNotes1">Acceso inmediato</span>
+					<span data-i18n="checkoutNotes2">Pago 100% seguro</span>
 					</div>
 				</form>
 			</section>
 		</div>
 
 		<section class="help" aria-label="Ayuda">
-			<p>¿Tienes dudas antes de comprar?</p>
-			<a href="https://wa.me/18438226879" target="_blank" rel="noreferrer noopener">Contacto por WhatsApp</a>
+			<p data-i18n="checkoutHelp">¿Tienes dudas antes de comprar?</p>
+			<a href="https://wa.me/18438226879" target="_blank" rel="noreferrer noopener" data-i18n="checkoutHelpLink">Contacto por WhatsApp</a>
 		</section>
 	</div>
 </Layout>
@@ -138,7 +137,7 @@ const paypalClientId = import.meta.env.PUBLIC_PAYPAL_CLIENT_ID ?? '';
 				style: { layout: 'vertical', shape: 'pill' },
 				createOrder: async () => {
 					setStatus('Creando orden en PayPal...');
-					const response = await fetch('/.netlify/functions/create-paypal-order', {
+					const response = await fetch('/api/create-paypal-order', {
 						method: 'POST',
 						headers: { 'Content-Type': 'application/json' },
 						body: JSON.stringify({
@@ -157,7 +156,7 @@ const paypalClientId = import.meta.env.PUBLIC_PAYPAL_CLIENT_ID ?? '';
 				},
 				onApprove: async (data) => {
 					setStatus('Capturando pago...');
-					const response = await fetch('/.netlify/functions/capture-paypal-order', {
+					const response = await fetch('/api/capture-paypal-order', {
 						method: 'POST',
 						headers: { 'Content-Type': 'application/json' },
 						body: JSON.stringify({ 

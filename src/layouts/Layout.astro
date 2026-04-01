@@ -33,9 +33,33 @@ import Footer from '../components/Footer.astro';
 		--oro-kodak: #E5A93C;
 		--terracota-solene: #B84A39;
 		--pizarra-profunda: #2C3E50;
+
+		--footer-cta-bg: var(--carbon-cinematografico);
+		--footer-cta-color: var(--blanco-editorial);
+	}
+
+	html.dark {
+		--blanco-editorial: #1A1C20;
+		--carbon-cinematografico: #F8F6F0;
+		--oro-kodak: #E5A93C;
+		--terracota-solene: #B84A39;
+		--pizarra-profunda: #a7b6c4;
+
+		--footer-cta-bg: #2C3E50;
+		--footer-cta-color: #F8F6F0;
 	}
 
 	/* Base Styles */
+	html {
+		box-sizing: border-box;
+	}
+
+	*,
+	*::before,
+	*::after {
+		box-sizing: inherit;
+	}
+
 	html,
 	body {
 		margin: 0;
@@ -52,11 +76,23 @@ import Footer from '../components/Footer.astro';
 	}
 
 	main {
-		width: 100%;
-		max-width: 900px;
+		width: min(100%, 1600px);
+		max-width: 1600px;
 		margin: 0 auto;
 		padding: 2rem 1rem;
 		flex: 1;
+	}
+
+	@media (max-width: 1024px) {
+		main {
+			padding: 2rem 1rem;
+		}
+	}
+
+	@media (min-width: 1025px) {
+		main {
+			padding: 2.5rem 1.5rem;
+		}
 	}
 
 	/* Typography */

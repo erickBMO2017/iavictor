@@ -1,321 +1,726 @@
 ---
+import ThemeToggle from './ThemeToggle.astro';
+
 const pathname = Astro.url.pathname;
 
 const links = [
-	{ href: '/', label: 'Inicio', icon: 'home' },
-	{ href: '/prompts', label: 'Prompts', icon: 'sparkles' },
-	{ href: '/faq', label: 'FAQ', icon: 'faq' },
+{ href: '/', key: 'home', label: 'Inicio', icon: 'home' },
+{ href: '/prompts', key: 'prompts', label: 'Prompts', icon: 'sparkles' },
+{ href: '/faq', key: 'faq', label: 'FAQ', icon: 'faq' },
 ];
 
 const isActive = (href) => (href === '/' ? pathname === '/' : pathname.startsWith(href));
 
 const icons = {
-	home: 'M3.75 9.75 12 3l8.25 6.75v9a.75.75 0 0 1-.75.75H15V14.25a.75.75 0 0 0-.75-.75h-4.5a.75.75 0 0 0-.75.75V19.5H4.5a.75.75 0 0 1-.75-.75v-9Z',
-	sparkles:
-		'M12 3.75 13.875 8.25 18.375 10.125 13.875 12 12 16.5 10.125 12 5.625 10.125 10.125 8.25 12 3.75Zm7.5 10.5.938 2.063 2.062.937-2.062.938-.938 2.062-.937-2.062-2.063-.938 2.063-.937.937-2.063ZM4.5 13.5l.75 1.5 1.5.75-1.5.75-.75 1.5-.75-1.5-1.5-.75 1.5-.75.75-1.5Z',
-	faq: 'M12 18h.008v.008H12V18Zm-2.25-9a2.25 2.25 0 1 1 3.973 1.44c-.563.63-1.473 1.166-1.473 2.31v.75',
+home: 'M3.75 9.75 12 3l8.25 6.75v9a.75.75 0 0 1-.75.75H15V14.25a.75.75 0 0 0-.75-.75h-4.5a.75.75 0 0 0-.75.75V19.5H4.5a.75.75 0 0 1-.75-.75v-9Z',
+sparkles:
+'M12 3.75 13.875 8.25 18.375 10.125 13.875 12 12 16.5 10.125 12 5.625 10.125 10.125 8.25 12 3.75Zm7.5 10.5.938 2.063 2.062.937-2.062.938-.938 2.062-.937-2.062-2.063-.938 2.063-.937.937-2.063ZM4.5 13.5l.75 1.5 1.5.75-1.5.75-.75 1.5-.75-1.5-1.5-.75 1.5-.75.75-1.5Z',
+faq: 'M12 18h.008v.008H12V18Zm-2.25-9a2.25 2.25 0 1 1 3.973 1.44c-.563.63-1.473 1.166-1.473 2.31v.75',
 };
 ---
 
 <header class="site-header">
-	<div class="header-inner">
-		<a class="brand" href="/" aria-label="Ir a inicio">
-			<span class="brand-mark">S</span>
-			<span class="brand-text">Solene Prompt</span>
-		</a>
+<div class="header-inner">
+<a class="brand" href="/" aria-label="Ir a inicio">
+<span class="brand-mark">S</span>
+<span class="brand-text" data-i18n="brand">Solene Prompt</span>
+</a>
 
-		<button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Abrir menú">
-			<span></span>
-			<span></span>
-			<span></span>
-		</button>
+<ThemeToggle />
 
-		<nav class="desktop-nav" aria-label="Navegación principal">
-			{
-				links.map((link) => (
-					<a href={link.href} class={isActive(link.href) ? 'active' : ''}>
-						<svg class="link-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-							<path d={icons[link.icon]} stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
-						</svg>
-						<span>{link.label}</span>
-					</a>
-				))
-			}
-		</nav>
+<button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Abrir men�">
+<span></span>
+<span></span>
+<span></span>
+</button>
 
-		<div class="header-tools" aria-label="Opciones de interfaz">
-			<button class="tool-button" type="button" aria-label="Cambiar idioma">
-				<svg class="tool-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-					<path d="M12 3a9 9 0 1 0 0 18m0-18c2.25 2.25 3.75 5.625 3.75 9S14.25 18.75 12 21m0-18c-2.25 2.25-3.75 5.625-3.75 9S9.75 18.75 12 21m-8.25-9h16.5M3.75 7.5h16.5m-16.5 9h16.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"></path>
-				</svg>
-				<span>ES / EN</span>
-			</button>
+<nav class="desktop-nav" aria-label="Navegaci�n principal">
+{
+links.map((link) => (
+<a href={link.href} class={isActive(link.href) ? 'active' : ''}>
+<svg class="link-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+<path d={icons[link.icon]} stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span data-i18n={link.key}>{link.label}</span>
+</a>
+))
+}
+</nav>
 
-			<button class="tool-button" type="button" aria-label="Cambiar modo de color">
-				<svg class="tool-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-					<path d="M12 3.75V5.25m0 13.5v1.5M5.636 5.636l1.06 1.06m10.608 10.608 1.06 1.06M3.75 12h1.5m13.5 0h1.5M5.636 18.364l1.06-1.06m10.608-10.608 1.06-1.06M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"></path>
-				</svg>
-				<span>Claro / Oscuro</span>
-			</button>
-		</div>
+<div class="header-tools" aria-label="Opciones de interfaz">
+<button class="tool-button" type="button" aria-label="Cambiar idioma">
+<svg class="tool-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+<path d="M12 3a9 9 0 1 0 0 18m0-18c2.25 2.25 3.75 5.625 3.75 9S14.25 18.75 12 21m0-18c-2.25 2.25-3.75 5.625-3.75 9S9.75 18.75 12 21m-8.25-9h16.5M3.75 7.5h16.5m-16.5 9h16.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span data-i18n="langLabel">ES / EN</span>
+</button>
+</div>
+</div>
 
-	
-	</div>
+<nav id="mobile-nav" class="mobile-nav" aria-label="Navegaci�n m�vil">
+{
+links.map((link) => (
+<a href={link.href} class={isActive(link.href) ? 'active' : ''}>
+<svg class="link-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+<path d={icons[link.icon]} stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span data-i18n={link.key}>{link.label}</span>
+</a>
+))
+}
 
-	<nav id="mobile-nav" class="mobile-nav" aria-label="Navegación móvil">
-		{
-			links.map((link) => (
-				<a href={link.href} class={isActive(link.href) ? 'active' : ''}>
-					<svg class="link-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-						<path d={icons[link.icon]} stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
-					</svg>
-					<span>{link.label}</span>
-				</a>
-			))
-		}
-
-		<div class="mobile-tools" aria-label="Opciones de interfaz">
-			<button class="tool-button" type="button" aria-label="Cambiar idioma">
-				<svg class="tool-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-					<path d="M12 3a9 9 0 1 0 0 18m0-18c2.25 2.25 3.75 5.625 3.75 9S14.25 18.75 12 21m0-18c-2.25 2.25-3.75 5.625-3.75 9S9.75 18.75 12 21m-8.25-9h16.5M3.75 7.5h16.5m-16.5 9h16.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"></path>
-				</svg>
-				<span>ES / EN</span>
-			</button>
-
-			<button class="tool-button" type="button" aria-label="Cambiar modo de color">
-				<svg class="tool-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-					<path d="M12 3.75V5.25m0 13.5v1.5M5.636 5.636l1.06 1.06m10.608 10.608 1.06 1.06M3.75 12h1.5m13.5 0h1.5M5.636 18.364l1.06-1.06m10.608-10.608 1.06-1.06M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"></path>
-				</svg>
-				<span>Claro / Oscuro</span>
-			</button>
-		</div>
-	</nav>
+<div class="mobile-tools" aria-label="Opciones de interfaz">
+<button class="tool-button" type="button" aria-label="Cambiar idioma">
+<svg class="tool-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+<path d="M12 3a9 9 0 1 0 0 18m0-18c2.25 2.25 3.75 5.625 3.75 9S14.25 18.75 12 21m0-18c-2.25 2.25-3.75 5.625-3.75 9S9.75 18.75 12 21m-8.25-9h16.5M3.75 7.5h16.5m-16.5 9h16.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span data-i18n="langLabel">ES / EN</span>
+</button>
+</div>
+</nav>
 </header>
 
 <script>
-	const header = document.querySelector('.site-header');
-	const button = header?.querySelector('.menu-toggle');
-	const mobileNav = header?.querySelector('.mobile-nav');
+const LANG_KEY = 'site-lang';
+const DEFAULT_LANG = 'es';
 
-	if (button && mobileNav) {
-		button.addEventListener('click', () => {
-			const isOpen = button.getAttribute('aria-expanded') === 'true';
-			button.setAttribute('aria-expanded', String(!isOpen));
-			header?.toggleAttribute('data-open');
-		});
+const translations = {
+	es: {
+		brand: 'Solene Prompt',
+		home: 'Inicio',
+		prompts: 'Prompts',
+		faq: 'FAQ',
+		langLabel: 'EN / ES',
+		heroKicker: 'Prompts Profesionales para IA',
+		heroTitle: 'Domina la creación de contenido con nuestro Pack de Prompts',
+		heroLead: 'Convierte tus ideas en contenido viral con acceso inmediato, calidad premium y resultados garantizados. Empieza hoy por solo $1.',
+		heroCta: 'Comprar el Pack a $1',
+		offersTitle: 'Pack Completo de Prompts',
+		socialTitle: '+150.000 personas siguen nuestro trabajo',
+		socialLead: 'Únete a la comunidad y mira lo que está diciendo.',
+		perksTitle: 'Solene Prompt',
+		perksLead: 'Calidad, rapidez y soporte dedicado en cada entrega.',
+		testimonialsTitle: 'Historias reales de personas que transformaron sus ideas',
+		heroPromptsKicker: 'Prompts Profesionales para IA',
+		promptsHeroKicker: 'Oferta especial por tiempo limitado',
+		promptsHeroTitle: '+500 prompts para transformar tus fotos',
+		promptsHeroLead: 'Más de 500 prompts de Instagram + exclusivos + guía completa para crear imágenes impactantes con IA.',
+		promptsPriceLabel: 'De US$15',
+		promptsPrice: 'US$1',
+		promptsBadge: '93% OFF',
+		promptsPayment: 'Forma de pago: PayPal o Tarjeta',
+		promptsCta: 'Comprar Ahora por $1',
+		promptsCta2: 'Acceso inmediato · Pago 100% seguro',
+		promptsImagesTitle: 'Imágenes reales generadas con el pack',
+		promptsIncludedTitle: 'Todo lo que necesitas',
+		promptsIncludedLead: 'Un pack completo para transformar tus fotos con IA.',
+		promptsHowTitle: 'Cómo funciona',
+		promptsPackTitle: 'Pack Completo de Prompts',
+		promptsPackLead: 'Acceso inmediato a todos los prompts, guías y actualizaciones futuras. Todo lo que necesitas para crear imágenes increíbles con IA.',
+		promptsPackCta: 'Comprar Ahora - US$1',
+		promptsTestimonialTitle: 'Historias reales de clientes',
+		checkoutBack: '← Volver al producto',
+		checkoutKicker: 'Revisa tu compra antes de pagar',
+		checkoutTitle: 'Pack Completo de Prompts',
+		checkoutDescription: 'Acceso inmediato a todos los prompts, guías y actualizaciones futuras para crear imágenes increíbles con IA.',
+		checkoutIncludesTitle: 'Qué está incluido',
+		checkoutTrustSafe: 'Pago seguro',
+		checkoutTrustFast: 'Acceso inmediato',
+		checkoutOffer: 'Oferta por tiempo limitado',
+		checkoutTotalLabel: 'Total',
+		checkoutName: 'Nombre completo',
+		checkoutEmail: 'Tu email',
+		checkoutEmailHelp: 'Enviaremos el link de acceso a este correo.',
+		checkoutPayBtn: 'Pagar con PayPal',
+		checkoutManualText: 'o pago manual',
+		checkoutManualBtn: 'Pagar con Binance o Zinli',
+		checkoutNotes1: 'Acceso inmediato',
+		checkoutNotes2: 'Pago 100% seguro',
+		checkoutHelp: '¿Tienes dudas antes de comprar?',
+		checkoutHelpLink: 'Contacto por WhatsApp',
+		faqHeroKicker: 'Central de Ayuda',
+		faqHeroTitle: 'Preguntas Frecuentes',
+		faqHeroLead: 'Encuentra respuestas a las dudas más comunes sobre nuestros productos y servicios.',
+		faqContactTitle: '¿No encontraste tu respuesta?',
+		faqContactLead: 'Escríbenos por WhatsApp y con gusto te ayudamos.',
+		faqContactBtn: 'Hablar por WhatsApp',
+		successTag: 'Pago completado',
+		successTitle: '¡Gracias por tu compra!',
+		successLead: 'Tu pago fue aprobado correctamente. En breve recibirás acceso a tu contenido en el correo registrado.',
+		successOrderPrefix: 'ID de orden:',
+		successButton1: 'Volver a Prompts',
+		successButton2: 'Contactar Soporte',
+		cancelTag: 'Pago cancelado',
+		cancelTitle: 'Tu pago no se completó',
+		cancelLead: 'No te preocupes, no se realizó ningún cobro exitoso. Puedes intentarlo nuevamente cuando quieras.',
+		cancelOrderPrefix: 'Orden cancelada:',
+		cancelButton1: 'Intentar de nuevo',
+		cancelButton2: 'Hablar por WhatsApp',
+		thanksTitle: '¡Gracias por tu compra!',
+		thanksMessage: 'Tu pago se ha procesado correctamente. Haz clic en el botón de abajo para obtener tu Pack Completo de Prompts.',
+		thanksDownloadBtn: 'Descargar PDF Ahora',
+		thanksNotePrefix: '¿Tuviste algún problema con la descarga?',
+		thanksContactLink: 'Contáctanos por WhatsApp',
+		thanksNoteSuffix: 'y te lo enviaremos manualmente.',
+		footerCtaTitle: '¿Listo para crear algo increíble?',
+		footerCtaText: 'Elige nuestros packs de prompts de IA y empieza a crear contenido ahora mismo.',
+		footerCtaBtn: 'Ver Prompts',
+		footerBrandDesc: 'Transformando ideas en realidad con prompts exclusivos para inteligencia artificial.',
+		footerProductsTitle: 'Productos',
+		footerProductPrompts: 'Paquetes de Prompts',
+		footerSupportTitle: 'Soporte',
+		footerSupportFaq: 'Preguntas Frecuentes',
+		footerInstagram: 'Instagram',
+		footerWhatsapp: 'WhatsApp',
+		footerCopyright: '© 2026 Solene Prompt. Todos los derechos reservados.',
+		footerContact: 'Contacto por WhatsApp',
+	},
+	en: {
+		brand: 'Solene Prompt',
+		home: 'Home',
+		prompts: 'Prompts',
+		faq: 'FAQ',
+		langLabel: 'ES / EN',
+		heroKicker: 'Professional AI Prompts',
+		heroTitle: 'Master content creation with our Prompt Pack',
+		heroLead: 'Turn your ideas into viral content with instant access, premium quality and guaranteed results. Start today for only $1.',
+		heroCta: 'Buy the Pack for $1',
+		offersTitle: 'Complete Prompt Pack',
+		socialTitle: '150,000+ people follow our work',
+		socialLead: 'Join the community and see what people are saying.',
+		perksTitle: 'Solene Prompt',
+		perksLead: 'Quality, speed and dedicated support in every delivery.',
+		testimonialsTitle: 'Real stories from people who transformed their ideas',
+		promptsHeroKicker: 'Limited time special offer',
+		promptsHeroTitle: '+500 prompts to transform your photos',
+		promptsHeroLead: 'Over 500 Instagram prompts + exclusives + complete guide to create impactful AI images.',
+		promptsPriceLabel: 'From US$15',
+		promptsPrice: 'US$1',
+		promptsBadge: '93% OFF',
+		promptsPayment: 'Payment method: PayPal or Card',
+		promptsCta: 'Buy Now for $1',
+		promptsCta2: 'Instant access · 100% secure payment',
+		promptsImagesTitle: 'Real images generated with the pack',
+		promptsIncludedTitle: 'Everything you need',
+		promptsIncludedLead: 'A complete pack to transform your photos with AI.',
+		promptsHowTitle: 'How it works',
+		promptsPackTitle: 'Complete Prompt Pack',
+		promptsPackLead: 'Instant access to all prompts, guides and future updates. Everything you need to create amazing AI images.',
+		promptsPackCta: 'Buy Now - US$1',
+		promptsPackNote: 'WhatsApp support · 100% secure payment',
+		promptsTestimonialTitle: 'Real customer stories',
+		checkoutBack: '← Back to product',
+		checkoutKicker: 'Review your purchase before paying',
+		checkoutTitle: 'Complete Prompt Pack',
+		checkoutDescription: 'Instant access to all prompts, guides and future updates to create amazing images with AI.',
+		checkoutIncludesTitle: 'What is included',
+		checkoutTrustSafe: 'Secure payment',
+		checkoutTrustFast: 'Instant access',
+		checkoutOffer: 'Limited time offer',
+		checkoutTotalLabel: 'Total',
+		checkoutName: 'Full name',
+		checkoutEmail: 'Your email',
+		checkoutEmailHelp: 'We will send the access link to this email.',
+		checkoutPayBtn: 'Pay with PayPal',
+		checkoutManualText: 'or manual payment',
+		checkoutManualBtn: 'Pay with Binance or Zinli',
+		checkoutNotes1: 'Instant access',
+		checkoutNotes2: '100% secure payment',
+		checkoutHelp: 'Have questions before buying?',
+		checkoutHelpLink: 'Contact via WhatsApp',
+		faqHeroKicker: 'Help Center',
+		faqHeroTitle: 'Frequently Asked Questions',
+		faqHeroLead: 'Find answers to the most common questions about our products and services.',
+		faqContactTitle: 'Didn’t find your answer?',
+		faqContactLead: 'Write to us on WhatsApp and we will gladly help you.',
+		faqContactBtn: 'Chat on WhatsApp',
+		successTag: 'Payment completed',
+		successTitle: 'Thanks for your purchase!',
+		successLead: 'Your payment has been successfully approved. You will shortly receive access to your content in the registered email.',
+		successOrderPrefix: 'Order ID:',
+		successButton1: 'Back to Prompts',
+		successButton2: 'Contact Support',
+		cancelTag: 'Payment canceled',
+		cancelTitle: 'Your payment was not completed',
+		cancelLead: 'Don’t worry, no successful charge was made. You can try again whenever you want.',
+		cancelOrderPrefix: 'Cancelled order:',
+		cancelButton1: 'Try again',
+		thanksTitle: 'Thanks for your purchase!',
+		thanksMessage: 'Your payment has been processed correctly. Click the button below to get your Complete Prompt Pack.',
+		thanksDownloadBtn: 'Download PDF Now',
+		thanksNotePrefix: 'Had an issue with the download?',
+		thanksContactLink: 'Contact us via WhatsApp',
+		thanksNoteSuffix: 'and we will send it manually.',
+		footerCtaTitle: 'Ready to create something amazing?',
+		footerCtaText: 'Choose our AI prompt packs and start creating content right now.',
+		footerCtaBtn: 'View Prompts',
+		footerBrandDesc: 'Turning ideas into reality with exclusive prompts for artificial intelligence.',
+		footerProductsTitle: 'Products',
+		footerProductPrompts: 'Prompt Packages',
+		footerSupportTitle: 'Support',
+		footerSupportFaq: 'Frequently Asked Questions',
+		footerInstagram: 'Instagram',
+		footerWhatsapp: 'WhatsApp',
+		footerCopyright: '© 2026 Solene Prompt. All rights reserved.',
+		footerContact: 'Contact via WhatsApp',
+		cancelButton2: 'Chat on WhatsApp',
+	},
+};
 
-		mobileNav.querySelectorAll('a').forEach((link) => {
-			link.addEventListener('click', () => {
-				button.setAttribute('aria-expanded', 'false');
-				header?.removeAttribute('data-open');
-			});
-		});
+const structuredTranslations = {
+	es: {
+		offers: [
+			{
+				title: 'Pack Completo de Prompts',
+				description: 'Accede a los mejores prompts listos para Instagram, TikTok y contenido viral.',
+				features: ['Prompts exclusivos', 'Acceso inmediato', 'Guía completa'],
+				price: 'US$1',
+				oldPrice: 'US$15',
+				discount: '93% OFF',
+				cta: 'Comprar Ahora por $1',
+			},
+		],
+		socialStats: ['Seguidores', 'Likes', 'Comentarios'],
+		perks: [
+			{ title: 'Acceso Inmediato', text: 'Recibe todo el pack de prompts en tu correo al instante tras realizar la compra.' },
+			{ title: 'Calidad Premium', text: 'Productos creados con tecnologías de IA modernas y enfoque en resultados.' },
+			{ title: 'Soporte Dedicado', text: 'Atención personalizada para resolver dudas y acompañarte en todo el proceso.' },
+		],
+		testimonials: [
+			{ quote: 'Este pack de prompts me ahorró muchísimas horas de trabajo. Las ideas que genera la IA son increíbles.', name: 'Carlos Ruiz', meta: 'Creador de Contenido' },
+			{ quote: 'Mis copys y guiones quedaron con un nivel profesional en pocos minutos. ¡Súper recomendado!', name: 'Amanda Reis', meta: 'Influencer Digital' },
+			{ quote: 'Por solo un dólar, el valor que aporta este pack es ridículo. Totalmente recomendado para agencias.', name: 'Juliana Santos', meta: 'Especialista en Marketing' },
+		],
+		sampleImages: ['Viaje a Venecia', 'Año Nuevo 2026', 'Graduación Infantil', 'Retrato Profesional', 'Viaje a Tailandia', 'Vacaciones en Maldivas'],
+		included: [
+			{ title: 'Prompts de Instagram', text: 'Todos los prompts públicos del perfil organizados y listos para usar.' },
+			{ title: 'Prompts Exclusivos', text: 'Prompts premium que no están en Instagram, creados para este pack.' },
+			{ title: 'Actualizaciones Gratis', text: 'Acceso a nuevos prompts públicos que se publiquen en el futuro.' },
+			{ title: 'Guía Nano Banana', text: 'Tutorial completo para generar imágenes con mejor calidad.' },
+			{ title: 'Tips de Fotografía', text: 'Cómo tomar fotos con mejores resultados para IA.' },
+		],
+		steps: [
+			{ title: 'Haz tu compra', text: 'Pago seguro con tarjeta o PIX para activar acceso inmediato.' },
+			{ title: 'Accede a los prompts', text: 'Recibes por email tu enlace personal a la biblioteca completa.' },
+			{ title: 'Crea imágenes increíbles', text: 'Usa los prompts en Gemini, Midjourney u otra IA que prefieras.' },
+		],
+		bullets: [
+			'+500 prompts incluidos',
+			'Acceso de por vida al documento',
+			'Actualizaciones gratuitas',
+			'Soporte prioritario por WhatsApp',
+			'Instrucciones simples de uso',
+			'Compatible con principales IAs',
+		],
+		faq: [
+			{ q: '🎨 ¿Para quién es el Pack de Prompts de Solene Prompt?', a: 'Está pensado para creadores, emprendedores y cualquier persona que quiera transformar fotos comunes en imágenes impactantes usando IA.' },
+			{ q: '🧪 ¿Los prompts realmente funcionan?', a: 'Sí. Están probados en distintos escenarios y optimizados para obtener resultados consistentes con buenas instrucciones y una foto base adecuada.' },
+			{ q: '🌍 ¿En qué plataformas funcionan los prompts?', a: 'Puedes usarlos en herramientas populares como Gemini, Midjourney y otros generadores de imágenes compatibles con prompts detallados.' },
+			{ q: '📸 ¿Hay ejemplos visuales de resultados?', a: 'Sí, incluimos referencias y ejemplos para que entiendas cómo adaptar cada prompt según el estilo que buscas.' },
+			{ q: '💼 ¿Puedo usar las imágenes con fines comerciales?', a: 'En general sí, siempre que revises las condiciones de la plataforma de IA que utilices y respetes derechos de terceros.' },
+			{ q: '💳 ¿Existe política de reembolso?', a: 'Si tienes un problema con el acceso o la entrega, escríbenos por WhatsApp y revisaremos tu caso para darte la mejor solución posible.' },
+			{ q: '🌱 Soy principiante en IA, ¿puedo usar este producto?', a: 'Sí. El pack incluye guía paso a paso y recomendaciones para que puedas empezar incluso sin experiencia previa.' },
+			{ q: '🧭 ¿Por dónde empiezo si soy nuevo?', a: 'Comienza por la guía principal, prueba un prompt base y luego ajusta variables como iluminación, estilo y encuadre.' },
+			{ q: '📷 ¿Puedo usar mis propias fotos?', a: 'Claro. De hecho, el sistema está pensado para que partas de tus fotos y las conviertas en composiciones mejoradas con IA.' },
+			{ q: '🤔 ¿Qué hago si el resultado no sale bien al primer intento?', a: 'Es normal iterar. Ajusta el prompt, prueba otra imagen base y modifica el estilo hasta conseguir el resultado ideal.' },
+			{ q: '🆘 ¿Puedo pedir ayuda si tengo dudas?', a: 'Sí, ofrecemos soporte por Instagram y WhatsApp para ayudarte en la configuración y uso del contenido.' },
+			{ q: '💙 ¿Qué hace diferente a Solene Prompt?', a: 'Combinamos prompts prácticos, contenido exclusivo, actualizaciones frecuentes y enfoque en resultados reales para uso personal o profesional.' },
+		],
+	},
+	en: {
+		offers: [
+			{
+				title: 'Complete Prompt Pack',
+				description: 'Access the best prompts ready for Instagram, TikTok and viral content.',
+				features: ['Exclusive prompts', 'Instant access', 'Complete guide'],
+				price: 'US$1',
+				oldPrice: 'US$15',
+				discount: '93% OFF',
+				cta: 'Buy Now for $1',
+			},
+		],
+		socialStats: ['Followers', 'Likes', 'Comments'],
+		perks: [
+			{ title: 'Instant Access', text: 'Get the full prompt pack to your email immediately after purchase.' },
+			{ title: 'Premium Quality', text: 'Products built with modern AI technologies and result-driven focus.' },
+			{ title: 'Dedicated Support', text: 'Personalized assistance to answer questions and guide you throughout the process.' },
+		],
+		testimonials: [
+			{ quote: 'This prompt pack saved me hours. The AI-generated ideas are incredible.', name: 'Carlos Ruiz', meta: 'Content Creator' },
+			{ quote: 'My copy and scripts reached pro level in minutes. Highly recommended!', name: 'Amanda Reis', meta: 'Digital Influencer' },
+			{ quote: 'For just one dollar, the value is unbelievable. Perfect for agencies.', name: 'Juliana Santos', meta: 'Marketing Specialist' },
+		],
+		sampleImages: ['Venice Trip', 'New Year 2026', 'Kids Graduation', 'Professional Portrait', 'Thailand Trip', 'Maldives Vacation'],
+		included: [
+			{ title: 'Instagram Prompts', text: 'All public profile prompts organized and ready to use.' },
+			{ title: 'Exclusive Prompts', text: 'Premium prompts not on Instagram, created for this pack.' },
+			{ title: 'Free Updates', text: 'Access to new public prompts released in the future.' },
+			{ title: 'Nano Banana Guide', text: 'Complete tutorial to generate higher quality images.' },
+			{ title: 'Photography Tips', text: 'How to shoot better photos for AI results.' },
+		],
+		steps: [
+			{ title: 'Make your purchase', text: 'Secure payment with card or PIX to activate instant access.' },
+			{ title: 'Access the prompts', text: 'Receive your personal link to the full library by email.' },
+			{ title: 'Create amazing images', text: 'Use the prompts in Gemini, Midjourney or another AI platform.' },
+		],
+		bullets: [
+			'+500 prompts included',
+			'Lifetime access to the document',
+			'Free updates',
+			'Priority WhatsApp support',
+			'Simple usage instructions',
+			'Compatible with major AIs',
+		],
+		faq: [
+			{ q: '🎨 Who is the Solene Prompt Prompt Pack for?', a: 'It is designed for creators, entrepreneurs and anyone who wants to transform ordinary photos into striking AI images.' },
+			{ q: '🧪 Do prompts really work?', a: 'Yes. They have been tested across scenarios and optimized for consistent results with good instructions and a suitable base photo.' },
+			{ q: '🌍 What platforms do the prompts work on?', a: 'Use them on popular tools like Gemini, Midjourney and other image generators compatible with detailed prompts.' },
+			{ q: '📸 Are there visual examples?', a: 'Yes, we include references and examples so you know how to adapt each prompt to your desired style.' },
+			{ q: '💼 Can I use images commercially?', a: 'Generally yes, as long as you review the terms of the AI platform and respect third-party rights.' },
+			{ q: '💳 Is there a refund policy?', a: 'If you have an access or delivery issue, message us on WhatsApp and we will review your case to provide the best solution.' },
+			{ q: '🌱 I am an AI beginner, can I use this product?', a: 'Yes. The pack includes step-by-step guidance and recommendations to start even without prior experience.' },
+			{ q: '🧭 Where do I begin if I am new?', a: 'Start with the main guide, try a base prompt, then tweak variables like lighting, style and framing.' },
+			{ q: '📷 Can I use my own photos?', a: 'Absolutely. The system is designed to start from your photos and turn them into enhanced AI compositions.' },
+			{ q: '🤔 What if the result does not work first try?', a: 'Iteration is normal. Adjust the prompt, try another base image and modify the style until you get the ideal result.' },
+			{ q: '🆘 Can I ask for help if I have doubts?', a: 'Yes, we offer support through Instagram and WhatsApp to help with setting up and using the content.' },
+			{ q: '💙 What makes Solene Prompt different?', a: 'We combine practical prompts, exclusive content, frequent updates and focus on real results for personal or professional use.' },
+		],
+	},
+};
+
+function resolveStructuredTranslation(lang, key) {
+	if (!structuredTranslations[lang]) return undefined;
+	const parts = key.split('-');
+	if (parts[0] === 'offer' && parts.length >= 3) {
+		const idx = Number(parts[1]);
+		const field = parts.slice(2).join('-');
+		const offer = structuredTranslations[lang].offers?.[idx];
+		if (!offer) return undefined;
+		if (field.startsWith('feature')) {
+			const featureIdx = Number(parts[3]);
+			return offer.features?.[featureIdx];
+		}
+		return offer[field];
 	}
+	if (parts[0] === 'social' && parts[2] === 'label') {
+		return structuredTranslations[lang].socialStats?.[Number(parts[1])];
+	}
+	if (parts[0] === 'perk' && parts.length === 3) {
+		const perk = structuredTranslations[lang].perks?.[Number(parts[1])];
+		return perk?.[parts[2]];
+	}
+	if (parts[0] === 'testimonial' && parts.length === 3) {
+		const t = structuredTranslations[lang].testimonials?.[Number(parts[1])];
+		return t?.[parts[2]];
+	}
+	if (parts[0] === 'sample' && parts.length === 2) {
+		return structuredTranslations[lang].sampleImages?.[Number(parts[1])];
+	}
+	if (parts[0] === 'included' && parts.length === 3) {
+		const inc = structuredTranslations[lang].included?.[Number(parts[1])];
+		return inc?.[parts[2]];
+	}
+	if (parts[0] === 'step' && parts.length === 3) {
+		const step = structuredTranslations[lang].steps?.[Number(parts[1])];
+		return step?.[parts[2]];
+	}
+	if (parts[0] === 'bullet' && parts.length === 2) {
+		return structuredTranslations[lang].bullets?.[Number(parts[1])];
+	}
+	if (parts[0] === 'faq' && parts.length === 3) {
+		const faq = structuredTranslations[lang].faq?.[Number(parts[1])];
+		return faq?.[parts[2]];
+	}
+	return undefined;
+}
+
+function setLanguage(lang) {
+	if (!translations[lang]) return;
+	localStorage.setItem(LANG_KEY, lang);
+	document.documentElement.lang = lang;
+
+	document.querySelectorAll('[data-i18n]').forEach((el) => {
+		const key = el.dataset.i18n;
+		if (!key) return;
+		let value = translations[lang][key];
+		if (value === undefined) {
+			value = resolveStructuredTranslation(lang, key);
+		}
+		if (value !== undefined) {
+			el.textContent = value;
+		}
+	});
+}
+
+function toggleLanguage() {
+const current = localStorage.getItem(LANG_KEY) || DEFAULT_LANG;
+setLanguage(current === 'es' ? 'en' : 'es');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+const initialLang = localStorage.getItem(LANG_KEY) || DEFAULT_LANG;
+setLanguage(initialLang);
+
+const languageButtons = document.querySelectorAll('.tool-button');
+languageButtons.forEach((button) => button.addEventListener('click', toggleLanguage));
+
+const header = document.querySelector('.site-header');
+const menuButton = header?.querySelector('.menu-toggle');
+const mobileNav = header?.querySelector('.mobile-nav');
+
+if (menuButton && mobileNav) {
+menuButton.addEventListener('click', () => {
+const isOpen = menuButton.getAttribute('aria-expanded') === 'true';
+menuButton.setAttribute('aria-expanded', String(!isOpen));
+header?.toggleAttribute('data-open');
+});
+
+mobileNav.querySelectorAll('a').forEach((link) => {
+link.addEventListener('click', () => {
+menuButton.setAttribute('aria-expanded', 'false');
+header?.removeAttribute('data-open');
+});
+});
+}
+});
 </script>
 
 <style>
-	.site-header {
-		position: sticky;
-		top: 0;
-		z-index: 50;
-		backdrop-filter: blur(10px);
-		background: color-mix(in srgb, var(--pizarra-profunda) 90%, transparent);
-		border-bottom: 1px solid color-mix(in srgb, var(--blanco-editorial) 10%, transparent);
-	}
+.site-header {
+position: sticky;
+top: 0;
+z-index: 50;
+backdrop-filter: blur(10px);
+background: color-mix(in srgb, var(--pizarra-profunda) 90%, transparent);
+border-bottom: 1px solid color-mix(in srgb, var(--blanco-editorial) 10%, transparent);
+}
 
-	.header-inner {
-		max-width: 1100px;
-		margin: 0 auto;
-		padding: 0.75rem 1rem;
-		display: grid;
-		grid-template-columns: auto 1fr auto auto;
-		align-items: center;
-		gap: 1rem;
-	}
+.header-inner {
+width: min(100%, 1400px);
+max-width: 1400px;
+margin: 0 auto;
+padding: 0.7rem 1rem;
+display: grid;
+grid-template-columns: auto auto minmax(0, 1fr) auto auto;
+align-items: center;
+gap: 0.8rem;
+min-height: 3.2rem;
+}
 
-	.brand {
-		display: inline-flex;
-		align-items: center;
-		gap: 0.6rem;
-		text-decoration: none;
-		color: var(--blanco-editorial);
-		font-weight: 800;
-		font-family: 'Oswald', sans-serif;
-		text-transform: uppercase;
-	}
+.theme-toggle {
+order: 0;
+}
 
-	.brand-mark {
-		width: 2rem;
-		height: 2rem;
-		border-radius: 0.6rem;
-		display: inline-flex;
-		align-items: center;
-		justify-content: center;
-		background: var(--oro-kodak);
-		color: var(--carbon-cinematografico);
-		font-size: 0.95rem;
-		font-weight: bold;
-	}
+.desktop-nav {
+display: flex;
+justify-content: flex-start;
+gap: 0.35rem;
+}
 
-	.brand-text {
-		letter-spacing: 0.2px;
-	}
+.brand {
+display: inline-flex;
+align-items: center;
+gap: 0.6rem;
+text-decoration: none;
+color: var(--blanco-editorial);
+font-weight: 800;
+font-family: 'Oswald', sans-serif;
+text-transform: uppercase;
+}
 
-	.desktop-nav {
-		display: flex;
-		justify-content: center;
-		gap: 0.35rem;
-	}
+.brand-mark {
+width: 2rem;
+height: 2rem;
+border-radius: 0.6rem;
+display: inline-flex;
+align-items: center;
+justify-content: center;
+background: var(--oro-kodak);
+color: var(--carbon-cinematografico);
+font-size: 0.95rem;
+font-weight: bold;
+}
 
-	.header-tools {
-		display: inline-flex;
-		align-items: center;
-		gap: 0.45rem;
-	}
+.brand-text {
+letter-spacing: 0.2px;
+}
 
-	.tool-button {
-		display: inline-flex;
-		align-items: center;
-		gap: 0.45rem;
-		padding: 0.5rem 0.75rem;
-		border-radius: 999px;
-		border: 1px solid color-mix(in srgb, var(--blanco-editorial) 20%, transparent);
-		background: transparent;
-		color: var(--blanco-editorial);
-		font-weight: 600;
-		cursor: pointer;
-		transition: background-color 0.2s ease, color 0.2s ease;
-	}
+.header-tools {
+display: inline-flex;
+align-items: center;
+gap: 0.45rem;
+}
 
-	.tool-button:hover {
-		background: color-mix(in srgb, var(--blanco-editorial) 10%, transparent);
-	}
+.tool-button {
+display: inline-flex;
+align-items: center;
+gap: 0.45rem;
+padding: 0.5rem 0.75rem;
+border-radius: 999px;
+border: 1px solid color-mix(in srgb, var(--blanco-editorial) 20%, transparent);
+background: transparent;
+color: var(--blanco-editorial);
+font-weight: 600;
+cursor: pointer;
+transition: background-color 0.2s ease, color 0.2s ease;
+}
 
-	.tool-icon {
-		width: 1rem;
-		height: 1rem;
-		flex-shrink: 0;
-	}
+.tool-button:hover {
+background: color-mix(in srgb, var(--blanco-editorial) 10%, transparent);
+}
 
-	.desktop-nav a,
-	.mobile-nav a {
-		display: inline-flex;
-		align-items: center;
-		gap: 0.45rem;
-		padding: 0.5rem 0.8rem;
-		border-radius: 999px;
-		text-decoration: none;
-		color: var(--blanco-editorial);
-		font-weight: 600;
-		border: 1px solid transparent;
-		transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
-	}
+.tool-icon {
+width: 1rem;
+height: 1rem;
+flex-shrink: 0;
+}
 
-	.link-icon {
-		width: 1rem;
-		height: 1rem;
-		flex-shrink: 0;
-	}
+.desktop-nav a,
+.mobile-nav a {
+display: inline-flex;
+align-items: center;
+gap: 0.45rem;
+padding: 0.5rem 0.8rem;
+border-radius: 999px;
+text-decoration: none;
+color: var(--blanco-editorial);
+font-weight: 600;
+border: 1px solid transparent;
+transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
 
-	.desktop-nav a:hover,
-	.mobile-nav a:hover {
-		background-color: color-mix(in srgb, var(--blanco-editorial) 10%, transparent);
-		color: var(--blanco-editorial);
-	}
+.link-icon {
+width: 1rem;
+height: 1rem;
+flex-shrink: 0;
+}
 
-	.desktop-nav a.active,
-	.mobile-nav a.active {
-		color: var(--oro-kodak);
-		border-color: var(--oro-kodak);
-	}
+.desktop-nav a:hover,
+.mobile-nav a:hover {
+background-color: color-mix(in srgb, var(--blanco-editorial) 10%, transparent);
+color: var(--blanco-editorial);
+}
 
-	.cta {
-		display: inline-flex;
-		align-items: center;
-		justify-content: center;
-		gap: 0.35rem;
-		text-decoration: none;
-		padding: 0.65rem 1rem;
-		border-radius: 999px;
-		font-weight: 700;
-		font-size: 0.95rem;
-		color: var(--carbon-cinematografico);
-		background: var(--oro-kodak);
-		box-shadow: 0 8px 20px rgba(229, 169, 60, 0.2);
-	}
+.desktop-nav a.active,
+.mobile-nav a.active {
+color: var(--oro-kodak);
+border-color: var(--oro-kodak);
+}
 
-	.cta-icon {
-		width: 1rem;
-		height: 1rem;
-	}
+.cta {
+display: inline-flex;
+align-items: center;
+justify-content: center;
+gap: 0.35rem;
+text-decoration: none;
+padding: 0.65rem 1rem;
+border-radius: 999px;
+font-weight: 700;
+font-size: 0.95rem;
+color: var(--carbon-cinematografico);
+background: var(--oro-kodak);
+box-shadow: 0 8px 20px rgba(229, 169, 60, 0.2);
+}
 
-	.cta:hover {
-		filter: brightness(1.08);
-	}
+.cta-icon {
+width: 1rem;
+height: 1rem;
+}
 
-	.menu-toggle {
-		display: none;
-		border: 1px solid color-mix(in srgb, var(--blanco-editorial) 40%, transparent);
-		background: transparent;
-		border-radius: 0.6rem;
-		padding: 0.45rem;
-		cursor: pointer;
-	}
+.cta:hover {
+filter: brightness(1.08);
+}
 
-	.menu-toggle span {
-		display: block;
-		width: 1.1rem;
-		height: 2px;
-		background: var(--blanco-editorial);
-		margin: 3px 0;
-	}
+.menu-toggle {
+display: none;
+width: 2.3rem;
+height: 2.3rem;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+gap: 0.2rem;
+border: 1px solid color-mix(in srgb, var(--blanco-editorial) 40%, transparent);
+background: transparent;
+border-radius: 0.6rem;
+padding: 0.3rem;
+cursor: pointer;
+transition: border-color 0.2s ease, background-color 0.2s ease;
+color: var(--blanco-editorial);
+}
 
-	.mobile-nav {
-		display: none;
-		max-width: 1100px;
-		margin: 0 auto;
-		padding: 0 1rem 1rem;
-		gap: 0.4rem;
-		flex-direction: column;
-	}
+.menu-toggle:hover {
+border-color: color-mix(in srgb, var(--blanco-editorial) 70%, transparent);
+background: color-mix(in srgb, var(--blanco-editorial) 10%, transparent);
+}
 
-	.mobile-cta {
-		margin-top: 0.4rem;
-	}
+.menu-toggle span {
+display: block;
+width: 1.35rem;
+height: 2px;
+background: currentColor;
+border-radius: 999px;
+margin: 0;
+}
 
-	.mobile-tools {
-		display: none;
-		margin-top: 0.5rem;
-		gap: 0.45rem;
-		flex-wrap: wrap;
-	}
+.mobile-nav {
+display: none;
+max-width: 1100px;
+margin: 0 auto;
+padding: 0 1rem 1rem;
+gap: 0.4rem;
+flex-direction: column;
+}
 
-	@media (max-width: 900px) {
-		.header-inner {
-			grid-template-columns: auto 1fr auto;
-			justify-content: space-between;
-		}
+.mobile-cta {
+margin-top: 0.4rem;
+}
 
-		.desktop-nav,
-		.cta,
-		.header-tools {
-			display: none;
-		}
+.mobile-tools {
+display: none;
+margin-top: 0.5rem;
+gap: 0.45rem;
+flex-wrap: wrap;
+}
 
-		.menu-toggle {
-			display: inline-block;
-		}
+@media (max-width: 900px) {
+.header-inner {
+width: 100%;
+max-width: 100%;
+grid-template-columns: auto 1fr auto auto;
+justify-content: space-between;
+padding: 0.6rem 0.8rem;
+}
 
-		.site-header[data-open] {
-			background: var(--pizarra-profunda);
-		}
-		
-		.site-header[data-open] .mobile-nav {
-			display: flex;
-		}
+.desktop-nav,
+.cta,
+.header-tools {
+display: none;
+}
 
-		.site-header[data-open] .mobile-tools {
-			display: flex;
-		}
-	}
-</style>
+.theme-toggle {
+display: inline-flex;
+grid-column: 3;
+align-self: center;
+}
+
+.menu-toggle {
+display: inline-flex;
+width: 2rem;
+height: 2rem;
+padding: 0.3rem;
+grid-column: 4;
+align-self: center;
+}
+
+.site-header[data-open] {
+background: var(--pizarra-profunda);
+}
+
+.site-header[data-open] .mobile-nav {
+display: flex;
+}
+
+.site-header[data-open] .mobile-tools {
+display: flex;
+}
+}

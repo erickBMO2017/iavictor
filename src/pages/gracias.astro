@@ -11,12 +11,12 @@ import Layout from '../layouts/Layout.astro';
 				</svg>
 			</div>
 			
-			<h1>¡Gracias por tu compra!</h1>
-			<p class="message">Tu pago se ha procesado correctamente. Haz clic en el botón de abajo para obtener tu Pack Completo de Prompts.</p>
+			<h1 data-i18n="thanksTitle">¡Gracias por tu compra!</h1>
+			<p class="message" data-i18n="thanksMessage">Tu pago se ha procesado correctamente. Haz clic en el botón de abajo para obtener tu Pack Completo de Prompts.</p>
 			
 			<div class="download-section">
 				<!-- El atributo download fuerza al navegador a descargar el archivo en lugar de solo abrirlo -->
-				<a href="/descargas/pack-prompts-solene.pdf" download="Pack-Prompts-Solene.pdf" class="btn primary download-btn">
+				<a href="/descargas/pack-prompts-solene.pdf" download="Pack-Prompts-Solene.pdf" class="btn primary download-btn" data-i18n="thanksDownloadBtn">
 					<svg class="btn-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
 						<path d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
 					</svg>
@@ -24,7 +24,11 @@ import Layout from '../layouts/Layout.astro';
 				</a>
 			</div>
 			
-			<p class="note">¿Tuviste algún problema con la descarga? <a href="https://wa.me/18438226879" target="_blank" rel="noreferrer noopener">Contáctanos por WhatsApp</a> y te lo enviaremos manualmente.</p>
+			<p class="note">
+				<span data-i18n="thanksNotePrefix">¿Tuviste algún problema con la descarga?</span> 
+				<a href="https://wa.me/18438226879" target="_blank" rel="noreferrer noopener" data-i18n="thanksContactLink">Contáctanos por WhatsApp</a> 
+				<span data-i18n="thanksNoteSuffix">y te lo enviaremos manualmente.</span>
+			</p>
 		</div>
 	</div>
 </Layout>

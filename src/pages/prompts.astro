@@ -79,30 +79,30 @@ const testimonials = [
 <Layout>
 	<div class="prompts-page">
 		<section class="hero" aria-label="Hero prompts">
-			<p class="kicker">Oferta especial por tiempo limitado</p>
-			<h1>+500 prompts para transformar tus fotos</h1>
-			<p>
+			<p class="kicker" data-i18n="promptsHeroKicker">Oferta especial por tiempo limitado</p>
+			<h1 data-i18n="promptsHeroTitle">+500 prompts para transformar tus fotos</h1>
+			<p data-i18n="promptsHeroLead">
 				Más de 500 prompts de Instagram + exclusivos + guía completa para crear imágenes
 				impactantes con IA.
 			</p>
 			<div class="price-box">
-				<span class="old">De US$15</span>
-				<strong>US$1</strong>
-				<span class="badge">93% OFF</span>
+				<span class="old" data-i18n="promptsPriceLabel">De US$15</span>
+				<strong data-i18n="promptsPrice">US$1</strong>
+				<span class="badge" data-i18n="promptsBadge">93% OFF</span>
 			</div>
-			<div class="payment">Forma de pago: PayPal o Tarjeta</div>
-			<a href="/compra" class="btn primary">Comprar Ahora por $1</a>
-			<small>Acceso inmediato · Pago 100% seguro</small>
+			<div class="payment" data-i18n="promptsPayment">Forma de pago: PayPal o Tarjeta</div>
+			<a href="/compra" class="btn primary" data-i18n="promptsCta">Comprar Ahora por $1</a>
+			<small data-i18n="promptsCta2">Acceso inmediato · Pago 100% seguro</small>
 		</section>
 
 		<section class="samples" aria-label="Ejemplos de imágenes">
-			<h2>Imágenes reales generadas con el pack</h2>
+			<h2 data-i18n="promptsImagesTitle">Imágenes reales generadas con el pack</h2>
 			<div class="samples-grid">
 				{
-					sampleImages.map((item) => (
+					sampleImages.map((item, index) => (
 						<article class="sample-card">
 							<div class="image-placeholder">IMG</div>
-							<h3>{item}</h3>
+							<h3 data-i18n={`sample-${index}`}>{item}</h3>
 						</article>
 					))
 				}
@@ -110,14 +110,14 @@ const testimonials = [
 		</section>
 
 		<section class="included" aria-label="Incluye">
-			<h2>Todo lo que necesitas</h2>
-			<p>Un pack completo para transformar tus fotos con IA.</p>
+			<h2 data-i18n="promptsIncludedTitle">Todo lo que necesitas</h2>
+			<p data-i18n="promptsIncludedLead">Un pack completo para transformar tus fotos con IA.</p>
 			<div class="included-grid">
 				{
-					included.map((item) => (
+					included.map((item, index) => (
 						<article class="included-card">
-							<h3>{item.title}</h3>
-							<p>{item.text}</p>
+							<h3 data-i18n={`included-${index}-title`}>{item.title}</h3>
+							<p data-i18n={`included-${index}-text`}>{item.text}</p>
 						</article>
 					))
 				}
@@ -125,14 +125,14 @@ const testimonials = [
 		</section>
 
 		<section class="how" aria-label="Cómo funciona">
-			<h2>Cómo funciona</h2>
+			<h2 data-i18n="promptsHowTitle">Cómo funciona</h2>
 			<div class="how-grid">
 				{
-					steps.map((step) => (
+					steps.map((step, index) => (
 						<article class="step-card">
 							<span class="step-number">{step.number}</span>
-							<h3>{step.title}</h3>
-							<p>{step.text}</p>
+							<h3 data-i18n={`step-${index}-title`}>{step.title}</h3>
+							<p data-i18n={`step-${index}-text`}>{step.text}</p>
 						</article>
 					))
 				}
@@ -140,15 +140,15 @@ const testimonials = [
 		</section>
 
 		<section class="pack" id="comprar" aria-label="Pack de prompts">
-			<h2>Pack Completo de Prompts</h2>
-			<p>
+			<h2 data-i18n="promptsPackTitle">Pack Completo de Prompts</h2>
+			<p data-i18n="promptsPackLead">
 				Acceso inmediato a todos los prompts, guías y actualizaciones futuras. Todo lo que
 				necesitas para crear imágenes increíbles con IA.
 			</p>
 			<ul>
 				{
-					bullets.map((item) => (
-						<li>{item}</li>
+					bullets.map((item, index) => (
+						<li data-i18n={`bullet-${index}`}>{item}</li>
 					))
 				}
 			</ul>
@@ -157,21 +157,21 @@ const testimonials = [
 					<span class="old">US$15</span>
 					<strong>US$1</strong>
 				</div>
-				<a href="/compra" class="btn primary">Comprar Ahora - US$1</a>
+				<a href="/compra" class="btn primary" data-i18n="promptsPackCta">Comprar Ahora - US$1</a>
 			</div>
-			<small>Soporte por WhatsApp · Pago 100% seguro</small>
+			<small data-i18n="promptsPackNote">Soporte por WhatsApp · Pago 100% seguro</small>
 		</section>
 
 		<section class="testimonials" aria-label="Testimonios">
-			<h2>Historias reales de clientes</h2>
+			<h2 data-i18n="promptsTestimonialTitle">Historias reales de clientes</h2>
 			<div class="testimonials-grid">
 				{
-					testimonials.map((item) => (
+					testimonials.map((item, index) => (
 						<article class="testimonial-card">
-							<p>“{item.quote}”</p>
+							<p data-i18n={`testimonial-${index}-quote`}>“{item.quote}”</p>
 							<div>
-								<strong>{item.name}</strong>
-								<span>{item.meta}</span>
+								<strong data-i18n={`testimonial-${index}-name`}>{item.name}</strong>
+								<span data-i18n={`testimonial-${index}-meta`}>{item.meta}</span>
 							</div>
 						</article>
 					))

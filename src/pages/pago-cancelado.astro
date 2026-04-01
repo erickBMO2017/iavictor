@@ -7,16 +7,16 @@ const orderID = Astro.url.searchParams.get('orderID');
 <Layout>
 	<div class="result-page canceled">
 		<section class="result-card" aria-label="Pago cancelado">
-			<p class="tag">Pago cancelado</p>
-			<h1>Tu pago no se completó</h1>
-			<p>
+			<p class="tag" data-i18n="cancelTag">Pago cancelado</p>
+			<h1 data-i18n="cancelTitle">Tu pago no se completó</h1>
+			<p data-i18n="cancelLead">
 				No te preocupes, no se realizó ningún cobro exitoso. Puedes intentarlo nuevamente cuando
 				quieras.
 			</p>
-			{orderID && <p class="order">Orden cancelada: {orderID}</p>}
+			{orderID && <p class="order"><span data-i18n="cancelOrderPrefix">Orden cancelada:</span> {orderID}</p>}
 			<div class="actions">
-				<a href="/compra" class="btn primary">Intentar de nuevo</a>
-				<a href="https://wa.me/18438226879" target="_blank" rel="noreferrer noopener" class="btn secondary">Hablar por WhatsApp</a>
+				<a href="/compra" class="btn primary" data-i18n="cancelButton1">Intentar de nuevo</a>
+				<a href="https://wa.me/18438226879" target="_blank" rel="noreferrer noopener" class="btn secondary" data-i18n="cancelButton2">Hablar por WhatsApp</a>
 			</div>
 		</section>
 	</div>
