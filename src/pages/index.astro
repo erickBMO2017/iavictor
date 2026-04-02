@@ -1,7 +1,12 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import HeroCarousel from '../components/HeroCarousel.astro'; // Importa el nuevo componente
+import { useTranslations, defaultLang } from '../i18n/ui'; // Importa el helper de i18n
 
-const offers = [
+const currentLocale = Astro.currentLocale || defaultLang;
+const t = useTranslations(currentLocale);
+
+const offersData = [
 	{
 		title: 'Pack Completo de Prompts',
 		description:
@@ -15,7 +20,7 @@ const offers = [
 	},
 ];
 
-const socialStats = [
+const socialStatsData = [
 	{ value: '150K+', label: 'Seguidores' },
 	{ value: '500K+', label: 'Likes' },
 	{ value: '10K+', label: 'Comentarios' },
@@ -36,7 +41,7 @@ const perks = [
 	},
 ];
 
-const testimonials = [
+const testimonialsData = [
 	{
 		name: 'Carlos Ruiz',
 		meta: 'Creador de Contenido',
@@ -56,40 +61,35 @@ const testimonials = [
 			'Por solo un dólar, el valor que aporta este pack es ridículo. Totalmente recomendado para agencias.',
 	},
 ];
+
+// Define el título y la descripción de la página usando las traducciones del carrusel/hero
+const pageTitle = t('carousel.mainTitle');
+const pageDescription = t('carousel.mainDescription');
 ---
 
-<Layout>
+<Layout title={pageTitle} description={pageDescription}>
 	<div class="home">
-		<section class="hero" aria-label="Hero principal">
-			<p class="hero-kicker" data-i18n="heroKicker">Prompts Profesionales para IA</p>
-			<h1 data-i18n="heroTitle">Domina la creación de contenido con nuestro Pack de Prompts</h1>
-			<p class="hero-lead" data-i18n="heroLead">
-				Convierte tus ideas en contenido viral con acceso inmediato, calidad premium y resultados garantizados. Empieza hoy por solo $1.
-			</p>
-			<div class="hero-actions">
-				<a href="/compra" class="btn primary" data-i18n="heroCta">Comprar el Pack a $1</a>
-			</div>
-		</section>
+		<HeroCarousel />
 
 		<section class="offers" aria-label="Productos principales">
-			<h2 data-i18n="offersTitle">Pack Completo de Prompts</h2>
+			<h2>{t('index.offers.title')}</h2>
 			{
-				offers.map((offer, index) => (
+				offersData.map((offer, index) => (
 					<article class="offer-card">
-						<h2 data-i18n={`offer-${index}-title`}>{offer.title}</h2>
-						<p class="offer-description" data-i18n={`offer-${index}-description`}>{offer.description}</p>
+						<h2>{t(`index.offers.item.${index}.title`)}</h2>
+						<p class="offer-description">{t(`index.offers.item.${index}.description`)}</p>
 						<ul>
 							{offer.features.map((item, featIndex) => (
-								<li data-i18n={`offer-${index}-feature-${featIndex}`}>{item}</li>
+								<li>{t(`index.offers.item.${index}.feature.${featIndex}`)}</li>
 							))}
 						</ul>
 						<div class="offer-footer">
 							<div class="price-wrap">
-								<span class="price" data-i18n={`offer-${index}-price`}>{offer.price}</span>
-								{offer.oldPrice && <span class="old-price" data-i18n={`offer-${index}-oldPrice`}>{offer.oldPrice}</span>}
-								{offer.discount && <span class="badge" data-i18n={`offer-${index}-discount`}>{offer.discount}</span>}
+								<span class="price">{t(`index.offers.item.${index}.price`)}</span>
+								{offer.oldPrice && <span class="old-price">{t(`index.offers.item.${index}.oldPrice`)}</span>}
+								{offer.discount && <span class="badge">{t(`index.offers.item.${index}.discount`)}</span>}
 							</div>
-							<a href={offer.href} class="btn ghost" data-i18n={`offer-${index}-cta`}>{offer.cta}</a>
+							<a href={offer.href} class="btn ghost">{t(`index.offers.item.${index}.cta`)}</a>
 						</div>
 					</article>
 				))
@@ -97,14 +97,14 @@ const testimonials = [
 		</section>
 
 		<section class="social-proof" aria-label="Métricas de redes">
-			<h2 data-i18n="socialTitle">+150.000 personas siguen nuestro trabajo</h2>
-			<p data-i18n="socialLead">Únete a la comunidad y mira lo que está diciendo.</p>
+			<h2>{t('index.socialStats.title')}</h2>
+			<p>{t('index.socialStats.lead')}</p>
 			<div class="stats-grid">
 				{
-					socialStats.map((item, index) => (
+					socialStatsData.map((item, index) => (
 						<div class="stat-item">
 							<strong>{item.value}</strong>
-							<span data-i18n={`social-${index}-label`}>{item.label}</span>
+							<span>{t(`index.socialStats.item.${index}.label`)}</span>
 						</div>
 					))
 				}
@@ -112,14 +112,14 @@ const testimonials = [
 		</section>
 
 		<section class="perks" aria-label="Por qué elegirnos">
-			<h2 data-i18n="perksTitle">Solene Prompt</h2>
-			<p data-i18n="perksLead">Calidad, rapidez y soporte dedicado en cada entrega.</p>
+			<h2>{t('index.perks.title')}</h2>
+			<p>{t('index.perks.lead')}</p>
 			<div class="perks-grid">
 				{
 					perks.map((perk, index) => (
 						<article class="perk-card">
-							<h3 data-i18n={`perk-${index}-title`}>{perk.title}</h3>
-							<p data-i18n={`perk-${index}-text`}>{perk.text}</p>
+							<h3>{t(`index.perks.item.${index}.title`)}</h3>
+							<p>{t(`index.perks.item.${index}.text`)}</p>
 						</article>
 					))
 				}
@@ -127,15 +127,15 @@ const testimonials = [
 		</section>
 
 		<section class="testimonials" aria-label="Testimonios">
-			<h2 data-i18n="testimonialsTitle">Historias reales de personas que transformaron sus ideas</h2>
+			<h2>{t('index.testimonials.title')}</h2>
 			<div class="testimonials-grid">
 				{
-					testimonials.map((item, index) => (
+					testimonialsData.map((item, index) => (
 						<article class="testimonial-card">
-							<p data-i18n={`testimonial-${index}-quote`}>“{item.quote}”</p>
+							<p>“{t(`index.testimonials.item.${index}.quote`)}”</p>
 							<div>
-								<strong data-i18n={`testimonial-${index}-name`}>{item.name}</strong>
-								<span data-i18n={`testimonial-${index}-meta`}>{item.meta}</span>
+								<strong>{t(`index.testimonials.item.${index}.name`)}</strong>
+								<span>{t(`index.testimonials.item.${index}.meta`)}</span>
 							</div>
 						</article>
 					))
@@ -151,11 +151,6 @@ const testimonials = [
 		flex-direction: column;
 		gap: 2rem;
 		padding: 1rem 0;
-	}
-
-	.hero {
-		text-align: center;
-		padding: 2rem 1rem;
 	}
 
 	.hero-kicker {

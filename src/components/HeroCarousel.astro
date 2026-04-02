@@ -1,0 +1,340 @@
+---
+// src/components/HeroCarousel.astro
+import { useTranslations, defaultLang } from '../i18n/ui';
+
+const currentLocale = Astro.currentLocale || defaultLang;
+const t = useTranslations(currentLocale);
+
+// Datos de los slides, usando las claves de traducción definidas en ui.js
+const slides = [
+  { key: 'slide1', href: '/prompts' },
+  { key: 'slide2', href: '/prompts' },
+  { key: 'slide3', href: '/prompts' },
+  { key: 'slide4', href: '/prompts' },
+  { key: 'slide5', href: '/prompts' },
+  { key: 'slide6', href: '/prompts' },
+];
+---
+
+<section class="hero-carousel-section" aria-label={t('carousel.mainTitle')}>
+  <div class="hero-content">
+    <p class="hero-kicker">{t('carousel.kicker')}</p>
+    <h1 class="hero-title">{t('carousel.mainTitle')}</h1>
+    <p class="hero-lead">{t('carousel.mainDescription')}</p>
+    <div class="hero-actions">
+      <a href="/compra" class="btn primary">{t('carousel.cta')}</a>
+    </div>
+  </div>
+
+  <div class="carousel-container">
+    <swiper-container
+      init="false"
+      class="heroSwiper"
+      aria-label={t('carousel.mainTitle')}
+    >
+      {slides.map((slide, index) => (
+        <swiper-slide aria-label={`${t(`carousel.${slide.key}.title`)} - ${t('carousel.pagination', { index: index + 1 })}`}>
+          <a href={slide.href} class="slide-content">
+            <div class="image-placeholder">
+              <span class="placeholder-text">{t(`carousel.${slide.key}.title`)}</span>
+            </div>
+            <div class="slide-info">
+              <h3 class="slide-title">{t(`carousel.${slide.key}.title`)}</h3>
+              <p class="slide-description">{t(`carousel.${slide.key}.description`)}</p>
+            </div>
+          </a>
+        </swiper-slide>
+      ))}
+    </swiper-container>
+
+    <div class="swiper-button-prev" aria-label={t('carousel.prev')}>
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+      </svg>
+    </div>
+    <div class="swiper-button-next" aria-label={t('carousel.next')}>
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5 15.75 12l-7.5 7.5" />
+      </svg>
+    </div>
+    <div class="swiper-pagination"></div>
+  </div>
+</section>
+
+<script>
+  // Importa y registra los elementos de Swiper
+  import { register } from 'swiper/element/bundle';
+  register();
+
+  const swiperEl = document.querySelector('.heroSwiper');
+  if (swiperEl) {
+    Object.assign(swiperEl, {
+      slidesPerView: 1,
+        spaceBetween: 10,
+        loop: true,
+        autoplay: {
+          delay: 5000,
+          disableOnInteraction: false,
+        },
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true,
+          renderBullet: function (index, className) {
+            // Usar una clave de traducción para el aria-label del bullet
+            const lang = document.documentElement.lang || 'es'; // Obtener el idioma actual
+            const translations = {
+              es: 'Ir a slide {index}',
+              en: 'Go to slide {index}',
+            };
+            const ariaLabel = (translations[lang] || translations['es']).replace('{index}', index + 1);
+            return `<span class="${className}" aria-label="${ariaLabel}"></span>`;
+          },
+        },
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+        breakpoints: {
+          640: {
+            slidesPerView: 1,
+            spaceBetween: 20,
+          },
+          768: {
+            slidesPerView: 2,
+            spaceBetween: 30,
+          },
+          1024: {
+            slidesPerView: 3,
+            spaceBetween: 40,
+          },
+        },
+      });
+      swiperEl.initialize();
+    }
+</script>
+
+<style>
+  .hero-carousel-section {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 1rem 0;
+    align-items: center;
+    text-align: center;
+  }
+
+  .hero-content {
+    max-width: 65ch;
+    margin-bottom: 1rem;
+  }
+
+  .hero-kicker {
+    margin: 0;
+    font-weight: 700;
+    color: var(--terracota-solene);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .hero-title {
+    margin: 0.35rem 0 0;
+    font-size: clamp(2rem, 4.5vw, 3rem);
+    line-height: 1.2;
+    color: var(--pizarra-profunda); /* Asegura que el color sea visible en ambos temas */
+  }
+
+  .hero-lead {
+    margin: 1rem auto 0;
+    color: var(--carbon-cinematografico);
+    line-height: 1.6;
+    max-width: 62ch;
+    font-size: 1.1rem;
+  }
+
+  .hero-actions {
+    margin-top: 1.5rem;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    padding: 0.8rem 1.75rem;
+    border-radius: 999px;
+    font-weight: 700;
+    border: 2px solid transparent;
+    transition: transform 0.2s ease;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .btn:hover {
+    transform: scale(1.03);
+  }
+
+  .btn.primary {
+    background: var(--oro-kodak);
+    color: var(--carbon-cinematografico);
+  }
+
+  .carousel-container {
+    position: relative;
+    width: 100%;
+    max-width: 1200px; /* Ajusta según el ancho máximo deseado */
+    margin: 0 auto;
+    padding: 0 2rem; /* Espacio para las flechas de navegación */
+  }
+
+  swiper-container {
+    width: 100%;
+    height: 400px; /* Altura fija para el carrusel */
+    --swiper-navigation-color: var(--oro-kodak);
+    --swiper-pagination-color: var(--oro-kodak);
+    --swiper-pagination-bullet-inactive-color: color-mix(in srgb, var(--oro-kodak) 50%, transparent);
+    --swiper-pagination-bullet-inactive-opacity: 0.7;
+  }
+
+  swiper-slide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    background: var(--blanco-editorial); /* Fondo del slide */
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 10px 30px -15px color-mix(in srgb, var(--pizarra-profunda) 20%, transparent);
+  }
+
+  .slide-content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .image-placeholder {
+    flex-grow: 1;
+    background-color: color-mix(in srgb, var(--carbon-cinematografico) 10%, transparent); /* Fondo sutil */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 16/9; /* Relación de aspecto profesional */
+    width: 100%;
+    color: var(--pizarra-profunda);
+    font-weight: 600;
+    font-size: 1.2rem;
+    border-bottom: 1px solid color-mix(in srgb, var(--pizarra-profunda) 15%, transparent);
+  }
+
+  .placeholder-text {
+    padding: 1rem;
+    text-align: center;
+  }
+
+  .slide-info {
+    padding: 1rem;
+    text-align: left;
+  }
+
+  .slide-title {
+    margin: 0;
+    font-size: 1.2rem;
+    color: var(--pizarra-profunda);
+  }
+
+  .slide-description {
+    margin: 0.5rem 0 0;
+    font-size: 0.9rem;
+    color: var(--carbon-cinematografico);
+  }
+
+  /* Estilos para las flechas de navegación */
+  .swiper-button-prev,
+  .swiper-button-next {
+    color: var(--oro-kodak);
+    width: 40px;
+    height: 40px;
+    background-color: color-mix(in srgb, var(--pizarra-profunda) 80%, transparent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .swiper-button-prev:hover,
+  .swiper-button-next:hover {
+    background-color: var(--pizarra-profunda);
+  }
+
+  .swiper-button-prev {
+    left: 0;
+  }
+
+  .swiper-button-next {
+    right: 0;
+  }
+
+  .swiper-button-prev svg,
+  .swiper-button-next svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  /* Estilos para la paginación */
+  .swiper-pagination {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+  }
+
+  @media (max-width: 768px) {
+    .carousel-container {
+      padding: 0 1rem;
+    }
+    .swiper-button-prev,
+    .swiper-button-next {
+      display: none; /* Ocultar flechas en móvil si se prefiere */
+    }
+    swiper-container {
+      height: 300px; /* Ajustar altura para móvil */
+    }
+    .image-placeholder {
+      aspect-ratio: 4/3; /* Ajustar relación de aspecto para móvil */
+    }
+  }
+
+  /* Adaptación para el tema oscuro */
+  html.dark .image-placeholder {
+    background-color: color-mix(in srgb, var(--blanco-editorial) 10%, transparent);
+    border-bottom-color: color-mix(in srgb, var(--blanco-editorial) 15%, transparent);
+    color: var(--blanco-editorial);
+  }
+
+  html.dark .slide-title {
+    color: var(--blanco-editorial);
+  }
+
+  html.dark .slide-description {
+    color: var(--pizarra-profunda); /* carbon-cinematografico en dark es blanco, pizarra-profunda es gris claro */
+  }
+
+  html.dark .swiper-button-prev,
+  html.dark .swiper-button-next {
+    background-color: color-mix(in srgb, var(--blanco-editorial) 20%, transparent);
+  }
+
+  html.dark .swiper-button-prev:hover,
+  html.dark .swiper-button-next:hover {
+    background-color: color-mix(in srgb, var(--blanco-editorial) 30%, transparent);
+  }
+</style>
